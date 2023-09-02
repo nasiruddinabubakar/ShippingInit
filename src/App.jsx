@@ -1,4 +1,4 @@
-import { SignUp, ToggleLoginSignup } from "./components/SignUp/SignUp";
+import { SignUp, ToggleLoginSignup } from "./components/Modules/SignUp/SignUp";
 
 
 function App() {
