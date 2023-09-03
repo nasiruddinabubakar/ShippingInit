@@ -1,4 +1,4 @@
-import { SignUp, ToggleLoginSignup } from "./components/Modules/SignUp/SignUp";
+import { Login, SignUp, ToggleLoginSignup } from "./components/Modules/auth/Login";
 
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
         <header>
           <nav></nav>
         </header>
-      <SignUp/>
+      <Login/>
        
       </div>
     </div>

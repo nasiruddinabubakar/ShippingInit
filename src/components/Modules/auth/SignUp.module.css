@@ -8,7 +8,7 @@
     flex-direction: column;
     gap: 2rem;
     width: 48rem;
-    margin: 8rem auto 0rem auto;
+    margin: 5rem auto 0rem auto;
     transition: 0.32s ease;
   }
   header {
@@ -92,4 +92,21 @@
       width: 20rem;
       margin: 1rem auto 1rem auto;
   }
-  
+  @media screen and (max-width:1366px) {
+    .emailinput input{
+        width: 100%;
+    padding: 0.8rem 1.2rem;
+    font-family: inherit;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-light--3);
+    transition: all 0.2s;
+}
+.emailinput label {
+ 
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+  }
