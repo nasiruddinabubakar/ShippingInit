@@ -10,8 +10,12 @@ export const Login = () => {
   }
   return (
     <>
+    
+      <div className="Main">
+      <header></header>
       {<LoginRegister />}
       <ToggleLoginSignup onHandleLogin={onHandleLogin} isLogin={isLogin} />
+      </div>
     </>
   );
 };

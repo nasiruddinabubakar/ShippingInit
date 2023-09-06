@@ -1,0 +1,27 @@
+.main{
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.container{
+    position: relative;
+    justify-content: space-between;
+    gap:2.4rem;
+    display: flex;
+    
+   
+    
+    
+    
+}
+.box{
+    background-color: var(--color-dark--2);
+    width: 42rem;
+    color: var(--color-light--1);
+    border-radius: 2rem;
+    /* min-height: calc(20vh - 2rem); */
+    min-width: 36rem;
+    height: 60rem;;
+    position: relative;
+}

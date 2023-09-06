@@ -9,8 +9,8 @@
   --color-brand--1: #ffb545;
   --color-brand--2: #00c46a;
   --color-dark--0: #242a2e;
-  --color-dark--1: #2d3439;
-  --color-dark--2: #42484d;
+  --color-dark--1: #212529;
+  --color-dark--2: #2b3035;
   --color-light--1: #aaa;
   --color-light--2: #ececec;
   --color-light--3: #d6dee0;
@@ -19,9 +19,11 @@ html {
     font-size: 62.5%;
 }
 body{
+  /* filter: invert(90%); */
     font-family: "Manrope", sans-serif;
 }
 .Main {
+  /* display: flex; */
   background-color: var(--color-dark--1);
   border-radius: 1rem;
   margin: 1.5rem;
