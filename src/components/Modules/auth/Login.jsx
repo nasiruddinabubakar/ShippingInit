@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { RegisterForm } from "./RegisterForm";
 import { LoginForm } from "./LoginForm";
+
+import { Header } from "../../UI/Header";
 export const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const LoginRegister = isLogin ? LoginForm : RegisterForm;
@@ -12,7 +14,7 @@ export const Login = () => {
     <>
     
       <div className="Main">
-      <header></header>
+     <Header/>
       {<LoginRegister />}
       <ToggleLoginSignup onHandleLogin={onHandleLogin} isLogin={isLogin} />
       </div>

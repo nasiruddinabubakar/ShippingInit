@@ -23,6 +23,7 @@ body{
     font-family: "Manrope", sans-serif;
 }
 .Main {
+  position: relative;
   /* display: flex; */
   background-color: var(--color-dark--1);
   border-radius: 1rem;

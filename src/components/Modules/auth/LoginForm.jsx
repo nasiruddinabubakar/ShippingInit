@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./SignUp.module.css";
 import { InputWithLabel } from "../../Molecules/InputWithLabel";
+import { Link } from "react-router-dom";
+
 
 export function LoginForm() {
   const [mail, setMail] = useState("");
@@ -28,7 +30,9 @@ export function LoginForm() {
           onChangeInput={onhandlePassword}
         />
       </div>
+      <Link to='/user/dashboard'>
       <button>Login</button>
+      </Link>
     </form>
   );
 }
