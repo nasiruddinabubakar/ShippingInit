@@ -84,7 +84,14 @@ export const Layout = () => {
           </ul>
         </div>
 
-        <div className={styles.box}></div>
+        <div className={styles.box}><ul className={styles.list}>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+                <p>Hermes Titanic</p>
+              </div>
+            </li></ul></div>
       </div>
       <div className={styles.btn_div}>
         <button onMouseOver={()=>{}}>Ship New Order <Ship size={20} /></button>

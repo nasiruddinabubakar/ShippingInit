@@ -31,3 +31,10 @@ body{
   min-height: calc(100vh - 4rem);
   /* width: 100%; */
 }
+@media screen and ( max-width:1366px){
+
+  .Main{
+    min-height: calc(90vh - 4rem);
+  }
+
+}
