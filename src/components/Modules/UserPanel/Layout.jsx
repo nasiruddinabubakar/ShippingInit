@@ -9,7 +9,80 @@ export const Layout = () => {
     <div className={`Main ${styles.main}`}>
       <Header/>
       <div className={styles.container}>
-        <div className={styles.box}></div>
+        <div className={styles.box}>
+          <ul className={styles.list}>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+                <p>Hermes Titanic</p>
+              </div>
+            </li>
+            <li>
+             
+              <h3>ID 2233</h3>
+              <div>
+                <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+             
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+            <li>
+              
+              <h3>ID 2233</h3>
+              <div>
+              <p>Karachi, Dubai, SiriLanka, SouthAfric</p>
+              </div>
+            </li>
+          </ul>
+        </div>
 
         <div className={styles.box}></div>
       </div>
