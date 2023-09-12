@@ -1,5 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login, SignUp, ToggleLoginSignup } from "./components/Modules/auth/Login";
+
+import NewOrder from "./components/Modules/NewOrder/NewOrder";
+import RoutesLayout from "./components/Modules/NewOrder/Route/RoutesLayout";
+
 import { Layout } from "./components/Modules/UserPanel/Layout";
  
 const router = createBrowserRouter([{
@@ -11,6 +15,14 @@ const router = createBrowserRouter([{
 {
   path:'/user/dashboard',
   element:<Layout/>
+},
+{
+  path:'/user/neworder',
+  element:<NewOrder/>,
+},
+{
+  path:'/user/routes',
+  element:<RoutesLayout/>,
 }
 
 ])

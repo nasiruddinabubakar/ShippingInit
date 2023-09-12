@@ -1,4 +1,5 @@
 export function Input({ type, placeholder, onChangeInput }) {
+ 
   return (
     <input
       type={type}

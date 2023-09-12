@@ -3,6 +3,7 @@ import { Label } from "../Atoms/Label";
 // import styles from "./SignUp.module.css";
 
 export function InputWithLabel({ text, type, placeholder, onChangeInput }) {
+ 
   return (
     <>
       <Label text={text} />
