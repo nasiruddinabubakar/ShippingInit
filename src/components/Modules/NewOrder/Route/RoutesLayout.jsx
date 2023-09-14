@@ -31,16 +31,13 @@ export default function RoutesLayout() {
 
   useEffect(() => {
     async function get_lat_long() {
-      try {
+      
         if (!fetchCoordinates) return;
         const req = await fetch(
-          `http://api.openweathermap.org/geo/1.0/direct?q=${fetchCoordinates}&limit=5&appid=${apiKey}`
+          `https://api.openweathermap.org/geo/1.0/direct?q=${fetchCoordinates}&limit=5&appid=d7ed84d83e949baab350dff74ab8e51d`
         );
         console.log(req);
-        if (!req.ok) {
-          throw new Error(`Failed to fetch data: ${req.statusText}`);
-        }
-  
+       
         const [data] = await req.json();
         const Location = [data];
         
@@ -54,10 +51,10 @@ export default function RoutesLayout() {
         }
         console.log(Location[0].lat);  
         setPickUp(Location);
-      } catch (error) {
-        console.error("An error occurred:", error);
+     
+       
         // You can handle the error here, such as displaying an error message to the user
-      }
+      
     }
   
     get_lat_long();
