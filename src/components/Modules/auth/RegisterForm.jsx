@@ -1,9 +1,11 @@
+import TopDown from "../../framer/TopDown";
 import { InputWithLabel } from "../../Molecules/InputWithLabel";
 import styles from "./SignUp.module.css";
 
 export const RegisterForm = () => {
   function onHandleName(e) {}
   return (
+    <TopDown>
     <form className={styles.login}>
       <div className={styles.emailinput}>
         <InputWithLabel
@@ -39,5 +41,6 @@ export const RegisterForm = () => {
       </div>
       <button>Register</button>
     </form>
+    </TopDown>
   );
 };

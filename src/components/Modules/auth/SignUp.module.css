@@ -9,7 +9,7 @@
     flex-direction: column;
     gap: 2rem;
     width: 48rem;
-    margin: 5rem auto 0rem auto;
+    margin: 0rem auto 0rem auto;
     transition: 0.32s ease;
   }
   header {

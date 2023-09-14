@@ -2,7 +2,8 @@ import { useState } from "react";
 import styles from "./SignUp.module.css";
 import { InputWithLabel } from "../../Molecules/InputWithLabel";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
+import TopDown from "../../framer/TopDown";
 
 export function LoginForm() {
   const [mail, setMail] = useState("");
@@ -13,6 +14,7 @@ export function LoginForm() {
     console.log(e.target.value);
   }
   return (
+ <TopDown>
     <form className={styles.login}>
       <div className={styles.emailinput}>
         <InputWithLabel
@@ -34,5 +36,7 @@ export function LoginForm() {
       <button>Login</button>
       </Link>
     </form>
+    </TopDown>
+   
   );
 }

@@ -52,6 +52,7 @@ export default function RoutesLayout() {
           setDropOff(Location);
           return;
         }
+        console.log(Location[0].lat);  
         setPickUp(Location);
       } catch (error) {
         console.error("An error occurred:", error);

@@ -2,6 +2,7 @@ import styles from "../../Modules/auth/SignUp.module.css";
 import { Link } from "react-router-dom";
 import { Header } from "../../UI/Header";
 import { InputWithLabel } from "../../Molecules/InputWithLabel";
+import TopDown from "../../framer/TopDown";
 
 export default function () {
   return (
@@ -28,6 +29,7 @@ export function NewOrderForm() {
   function onhandleEmail() {}
   function onhandlePassword() {}
   return (
+    <TopDown>
     <form className={styles.login}>
       <div className={styles.emailinput}>
         <InputWithLabel
@@ -49,5 +51,6 @@ export function NewOrderForm() {
         <button>Next </button>
       </Link>
     </form>
+    </TopDown>
   );
 }
