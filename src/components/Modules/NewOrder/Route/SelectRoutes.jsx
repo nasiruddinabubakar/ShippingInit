@@ -6,6 +6,7 @@ import TopDown from "../../../framer/TopDown";
 import { motion, AnimatePresence } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Label } from "../../../Atoms/Label";
 
 export const SelectRoutes = ({
   dropOff,
@@ -44,12 +45,14 @@ export const SelectRoutes = ({
       <TopDown>
         <form className={styles2.login}>
           <div className={styles2.emailinput}>
-            <InputWithLabel
+            {/* <InputWithLabel
               text={"DropOff"}
               type={"text"}
               placeholder={"London"}
               onChangeInput={handleCoordinates}
-            />
+            /> */}
+            <Label text={'DropOff '}/>
+            <input type="text" placeholder="London" onChange={handleCoordinates} disabled={pickUpOrDropOff?true:false}/>
           </div>
 
           <>
