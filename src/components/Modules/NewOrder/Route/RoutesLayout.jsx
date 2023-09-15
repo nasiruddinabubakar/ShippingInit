@@ -31,35 +31,37 @@ export default function RoutesLayout() {
 
   useEffect(() => {
     async function get_lat_long() {
-      
+      try {
         if (!fetchCoordinates) return;
         const req = await fetch(
           `https://api.openweathermap.org/geo/1.0/direct?q=${fetchCoordinates}&limit=5&appid=d7ed84d83e949baab350dff74ab8e51d`
         );
-        console.log(req);
-       
+        if (!req.ok) {
+          throw new Error(`HTTPS Error: ${req.status} - ${req.statusText}`);
+        }
+
         const [data] = await req.json();
-        const Location = [data];
-        
-        if (Array.isArray(Location) && Location.length === 0) {
-            console.log('Location is an empty array');
-          }
+        const Location = data;
+
+        if (typeof Location === "undefined") {
+          return;
+        }
         if (!pickupOrDropOff) {
-          console.log(Location[0].lat);
           setDropOff(Location);
           return;
         }
-        console.log(Location[0].lat);  
+
         setPickUp(Location);
-     
-       
-        // You can handle the error here, such as displaying an error message to the user
-      
+      } catch (error) {
+        // Handle errors here, such as displaying an error message to the user
+        console.error("An error occurred:", error);
+      }
+      // You can handle the error here, such as displaying an error message to the user
     }
-  
+
     get_lat_long();
   }, [fetchCoordinates]);
-  
+
   return (
     <div className={styles.app}>
       <SelectRoutes
@@ -70,12 +72,14 @@ export default function RoutesLayout() {
       />
       {!pickupOrDropOff ? (
         dropOff ? (
-          <Map lat={dropOff[0].lat} lon={dropOff[0].lon} />
+          <Map lat={dropOff.lat} lon={dropOff.lon} />
         ) : (
           <Map />
         )
+      ) : pickUp ? (
+        <Map lat={pickUp.lat} lon={pickUp.lon} />
       ) : (
-         pickUp?<Map lat={pickUp[0].lat} lon={pickUp[0].lon} />:<Map/>
+        <Map />
       )}
       {/* {pickUp?
       <Map lat={pickUp[0].lat} lon={pickUp[0].lon}/>
