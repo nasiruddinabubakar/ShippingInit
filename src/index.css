@@ -36,10 +36,6 @@ body{
 .map{
   height: 100%;
 }
-.toast-message{
-  background: darkblue;
-  color: #fff;
-  font-size: 16px;
-  width: 34vw;
-  padding: 30px 20px;
+.toast_message{
+  font-size: 15px;
 }

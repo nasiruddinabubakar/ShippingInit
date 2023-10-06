@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { RegisterForm } from "./RegisterForm";
+import { RegisterData } from "./RegisterData";
 import { LoginForm } from "./LoginForm";
 
 import { Header } from "../../UI/Header";
 export const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const LoginRegister = isLogin ? LoginForm : RegisterForm;
+  const LoginRegister = isLogin ? LoginForm : RegisterData;
 
   function onHandleLogin() {
     setIsLogin((isLogin) => !isLogin);
