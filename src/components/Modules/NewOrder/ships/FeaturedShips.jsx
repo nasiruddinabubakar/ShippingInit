@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Header } from "../../../UI/Header";
 import styles from "./FeaturedShips.module.css";
-import Opacity from "../../../framer/Opacity";
+import OpacityDiv from "../../../framer/OpacityDiv";
 const FeaturedShips = () => {
   return (
     <div className={styles.container}>
@@ -9,38 +9,38 @@ const FeaturedShips = () => {
 
       <div className={styles.container}>
         <div className={styles.innercontainer}>
-         <Opacity>
+         <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
               <img src="/1.jpg" />
             </div>
             <Details />
           </div>
-          </Opacity>
-         <Opacity>
+          </OpacityDiv>
+         <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
               <img src="/1.jpg" />
             </div>
             <Details />
           </div>
-          </Opacity>
-         <Opacity>
+          </OpacityDiv>
+         <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
               <img src="/1.jpg" />
             </div>
             <Details />
           </div>
-          </Opacity>
-         <Opacity>
+          </OpacityDiv>
+         <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
               <img src="/1.jpg" />
             </div>
             <Details />
           </div>
-          </Opacity>
+          </OpacityDiv>
           
         </div>
       </div>
