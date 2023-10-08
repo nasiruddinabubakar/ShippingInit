@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Label } from "../../../Atoms/Label";
+import { Link } from "react-router-dom";
 
 export const SelectRoutes = ({
   dropOff,
@@ -66,17 +67,21 @@ export const SelectRoutes = ({
                     onChangeInput={handleCoordinates}
                   />
                 </div>
+                <Link to ='/neworder/routes/ships'>
                 <button type="button" onClick={notify}>
                   Confirm
                 </button>
+                </Link>
                 <ToastContainer />
               </>
             ) : (
               <>
                 {" "}
+               
                 <button type="button" onClick={setPickupOrDropOff}>
                   Confirm
                 </button>
+               
               </>
             )}
           </>

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login, SignUp, ToggleLoginSignup } from "./components/Modules/auth/Login";
-
+import ShipInfo from "./components/Modules/NewOrder/ships/ShipInfo";
 import NewOrder from "./components/Modules/NewOrder/NewOrder";
 import RoutesLayout from "./components/Modules/NewOrder/Route/RoutesLayout";
 
@@ -21,8 +21,12 @@ const router = createBrowserRouter([{
   element:<NewOrder/>,
 },
 {
-  path:'/user/routes',
+  path:'/neworder/routes',
   element:<RoutesLayout/>,
+},
+{
+  path:'/neworder/routes/ships',
+  element:<ShipInfo/>,
 }
 
 ])
@@ -32,6 +36,7 @@ function App() {
       
   </RouterProvider>
   
+  // return (<ShipInfo/>
   );
 }
 

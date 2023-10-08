@@ -1,11 +1,11 @@
 header{
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     height: 90px;
     width: 99.5%;
     /* box-shadow: 0px 0px 4px 0px  var(--color-brand--2); */
     align-items: center;
     border:none ;
-    border-bottom: 1px solid var(--color-dark--2);
+    border-bottom: 1px solid rgb(63, 62, 62);
 }
 nav{
     position: relative;

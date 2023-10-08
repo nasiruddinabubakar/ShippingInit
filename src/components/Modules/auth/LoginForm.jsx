@@ -67,9 +67,9 @@ export const LoginForm = ({ onhandleEmail, onhandlePassword, handleLogin }) => {
             onChangeInput={onhandlePassword}
           />
         </div>
-        {/* <Link to="/user/dashboard"> */}
+        <Link to="/user/dashboard">
         <button>Login</button>
-        {/* </Link> */}
+        </Link>
       </form>
     </TopDown>
   );

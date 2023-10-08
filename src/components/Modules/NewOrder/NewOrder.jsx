@@ -47,7 +47,7 @@ export function NewOrderForm() {
           onChangeInput={onhandlePassword}
         />
       </div>
-      <Link to="/user/routes">
+      <Link to="/neworder/routes">
         <button>Next </button>
       </Link>
     </form>

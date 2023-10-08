@@ -58,13 +58,17 @@ export const RegisterData = () => {
     console.log(validateEmail(registerUser.mail));
     if (validateEmail(registerUser.mail) === false) {
       notify("Email is not valid");
+      return;
     } else {
-    }
+    } 
     if (registerUser.password === "") {
       notify("Password Doesnt match");
+      return;
     }
+    
+    postData('http://127.0.0.1:5000/api/users/register',registerUser);
 
-    console.log(registerUser);
+    
   };
   return (
     <RegisterForm
@@ -77,4 +81,11 @@ export const RegisterData = () => {
   );
 };
 
-
+async function postData(url = "", data = {}) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })}

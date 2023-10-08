@@ -88,19 +88,19 @@ img{
 }
 /* Styling the scrollbar track (the area behind the thumb) */
 ::-webkit-scrollbar {
-    width: 12px; /* Set the width of the scrollbar */
+    width: 10px; /* Set the width of the scrollbar */
    
   }
   
   /* Styling the scrollbar thumb (the draggable part) */
   ::-webkit-scrollbar-thumb {
-    border-radius: 0rem 2rem 2rem 0rem;
-    background: var(--color-brand--2); /* Set the color of the scrollbar thumb */
+    /* border-radius: 0rem 2rem 2rem 0rem; */
+    background: #7777 /* Set the color of the scrollbar thumb */
   }
   
   /* Styling the scrollbar track when the mouse hovers over it */
   ::-webkit-scrollbar-track {
-    border-radius: 0rem 4rem 3rem 2rem;
-
-    background: var(--color-dark--2);
+    /* border-radius: 0rem 4rem 3rem 2rem; */
+    border :1px solid rgb(61, 59, 59);
+    background: rgb(61, 60, 60);
   }
