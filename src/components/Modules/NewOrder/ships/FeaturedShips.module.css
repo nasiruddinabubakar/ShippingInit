@@ -58,7 +58,7 @@ display: flex;
 .heading h2{
     font-size: large;
     display: flex;
-    color: var(--color-brand--1);
+    color: var( --color-light--2);
 }
 
 .dept{
