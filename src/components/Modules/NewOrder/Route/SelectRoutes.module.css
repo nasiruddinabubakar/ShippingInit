@@ -16,7 +16,7 @@
   .headings :nth-child(2){
     color: var(--color-brand--2);
   }
-  h3{
+  .head{
     margin-top: 4rem;
     color: var(--color-light--1);
   }

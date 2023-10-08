@@ -3,7 +3,7 @@ import { Login, SignUp, ToggleLoginSignup } from "./components/Modules/auth/Logi
 import ShipInfo from "./components/Modules/NewOrder/ships/ShipInfo";
 import NewOrder from "./components/Modules/NewOrder/NewOrder";
 import RoutesLayout from "./components/Modules/NewOrder/Route/RoutesLayout";
-
+import FeaturedShips from "./components/Modules/NewOrder/ships/FeaturedShips";
 import { Layout } from "./components/Modules/UserPanel/Layout";
  
 const router = createBrowserRouter([{
@@ -26,6 +26,10 @@ const router = createBrowserRouter([{
 },
 {
   path:'/neworder/routes/ships',
+  element:<FeaturedShips/>,
+},
+{
+  path:'/neworder/routes/ships/ship',
   element:<ShipInfo/>,
 }
 
@@ -36,7 +40,7 @@ function App() {
       
   </RouterProvider>
   
-  // return (<ShipInfo/>
+  // return (<FeaturedShips/>
   );
 }
 
