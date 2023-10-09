@@ -77,7 +77,8 @@ display: flex;
     display: flex;
 }
 .arriv h4{
-    font-size: 1.3rem;
+    font-weight: 500;
+    font-size: 1.25rem;
     color: var(--color-brand--1);
 }
 .detailbtn{
