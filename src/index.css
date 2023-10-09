@@ -31,7 +31,11 @@ body{
   /* border-radius: 1rem; */
   /* margin: 1.5rem; */
   min-height: calc(100vh);
+  /* background-image: url(/public/background.jpg); */
   /* width: 100%; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .map{

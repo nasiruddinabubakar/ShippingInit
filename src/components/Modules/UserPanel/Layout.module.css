@@ -1,11 +1,12 @@
 .main{
 
    display: flex;
-   gap: 8rem;
+   gap: 6rem;
    align-items: center;
    flex-direction: column;
 }
 .container{
+    margin-top: 2rem;
     position: relative;
     justify-content: space-between;
     gap:2.4rem;
@@ -15,6 +16,26 @@
     
     
     
+}
+.heading{
+    display: flex;
+    gap: 5rem;
+    justify-content: space-around;
+}
+.heading :first-child{
+
+    color: var(--color-brand--2);
+    font-family: inherit;
+}
+.heading :nth-child(2){
+
+    color: var(--color-brand--1);
+    font-family: inherit;
+}
+.heading h1{
+    display: inherit;
+    gap: 0.5rem;
+    align-items: center;
 }
 .box{
     background-color: var(--color-dark--2);
