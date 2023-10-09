@@ -11,7 +11,7 @@ export default () => {
           <div className={styles.box}>
             <div className={styles.image}>
           <Opacity time={1}>
-              <img src="/1.jpg" />
+              <img src="/ship.jpeg" />
               </Opacity>
               </div>
           </div>

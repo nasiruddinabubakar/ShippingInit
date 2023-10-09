@@ -20,7 +20,7 @@ const FeaturedShips = () => {
          <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
-              <img src="/1.jpg" />
+              <img src="/ship.jpeg" />
             </div>
             <Details />
           </div>
@@ -28,7 +28,7 @@ const FeaturedShips = () => {
          <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
-              <img src="/1.jpg" />
+              <img src="/ship1.jpeg" />
             </div>
             <Details />
           </div>
@@ -36,7 +36,7 @@ const FeaturedShips = () => {
          <OpacityDiv>
           <div className={styles.detailsbox}>
             <div className={styles.shipdiv}>
-              <img src="/1.jpg" />
+              <img src="/ship2.jpg" />
             </div>
             <Details />
           </div>
