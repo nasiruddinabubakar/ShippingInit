@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RegisterData } from "./RegisterData";
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "./LoginForm.jsx";
 
 import { Header } from "../../UI/Header";
 export const Login = () => {

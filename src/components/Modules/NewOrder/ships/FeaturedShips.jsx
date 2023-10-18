@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Header } from "../../../UI/Header";
 import styles from "./FeaturedShips.module.css";
 import OpacityDiv from "../../../framer/OpacityDiv";
+import {  CheckoutBox } from "../../CheckOut/CheckoutBox";
 const FeaturedShips = () => {
   return (
     <div className={styles.container}>
@@ -41,8 +42,9 @@ const FeaturedShips = () => {
             <Details />
           </div>
           </OpacityDiv>
-          
+          <CheckoutBox/>
         </div>
+        
       </div>
     </div>
   );

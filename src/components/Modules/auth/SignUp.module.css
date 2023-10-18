@@ -35,6 +35,8 @@
       background-color: var(--color-light--3);
       transition: all 0.2s;
   }
+  
+  
   .emailinput label {
    
     font-weight: 600;

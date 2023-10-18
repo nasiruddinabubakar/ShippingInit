@@ -2,6 +2,7 @@ import styles from "./ShipInfo.module.css";
 import { Header } from "../../../UI/Header";
 import { easeIn, motion } from "framer-motion";
 import Opacity from "../../../framer/Opacity";
+import { Check } from "lucide-react";
 export default () => {
   return (
     <div className={styles.container}>
@@ -100,6 +101,7 @@ export default () => {
             </Opacity>
           </div>
         </div>
+        <button className={styles.butt}>Confirm Ship <Check size={20}/></button>
       </div>
     </div>
   );

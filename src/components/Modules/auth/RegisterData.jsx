@@ -47,7 +47,7 @@ export const RegisterData = () => {
     return regex.test(email);
   };
 
-  function handleRegister (e)  {
+  async function handleRegister (e)  {
     e.preventDefault();
     const notify = (text) => {
       toast.error(text, {
@@ -66,8 +66,15 @@ export const RegisterData = () => {
       return;
     }
     
-    postData('http://127.0.0.1:5000/api/users/register',registerUser);
-
+    const res = await postData('http://127.0.0.1:5000/api/users/register',registerUser);
+    console.log(res);  
+    if(res){
+       
+        toast.success("Account Created",{
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        })
+      }
     
   };
   return (
@@ -88,4 +95,7 @@ async function postData(url = "", data = {}) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  })}
+  })
+return await response.json();
+ 
+}
