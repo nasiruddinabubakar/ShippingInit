@@ -1,13 +1,13 @@
 import {  Anchor, Check, Container, Sailboat, Ship } from "lucide-react";
 import styles from "./Layout.module.css";
-import { Header } from "../../UI/Header";
+import { HeaderLogout } from "../../UI/HeaderLogout";
 import { Link } from "react-router-dom";
 export const Layout = () => {
   // const [setColor]
   return (
     
     <div className={`Main ${styles.main}`}>
-      <Header/>
+      <HeaderLogout/>
       <div className={styles.papa}>
       <div className={styles.heading}>
       <h1>Delivered<Check strokeWidth={2.9} /></h1>

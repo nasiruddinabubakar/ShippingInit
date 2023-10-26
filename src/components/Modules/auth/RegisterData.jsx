@@ -1,6 +1,6 @@
 import { useReducer, useState } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import RegisterForm from "./RegisterForm";
 
 const registerReducer = (state, { type, payload }) => {
@@ -67,14 +67,23 @@ export const RegisterData = () => {
     }
     
     const res = await postData('http://127.0.0.1:5000/api/users/register',registerUser);
-    console.log(res);  
-    if(res){
+    console.log(res.status);  
+    
+
+    if(res.status==="failed"){
        
-        toast.success("Account Created",{
+        toast.error(res.message,{
           position: toast.POSITION.TOP_RIGHT,
           className: "toast_message",
         })
+        
       }
+     if(res.status==='success') {
+      toast.success("Account Created",{
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast_message",
+      })
+    }
     
   };
   return (

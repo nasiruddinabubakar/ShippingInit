@@ -19,9 +19,9 @@ export default () => {
           
           <div className={styles.box}>
           <Opacity time={2}>
-            <div>
+            <div style={{borderRadius:'1.5rem'}}>
               {" "}
-              <h2 className={styles.bar}>Voyage Information</h2>
+               <h2 className={styles.bar}>Voyage Information</h2>
             </div>
           
             <VoyageDetails />
@@ -39,27 +39,27 @@ export default () => {
               <table class="aparams">
                 <tbody>
                   <tr>
-                    <td class="n3">IMO</td>
-                    <td class="v3">9993433</td>
+                    <td className="n3">IMO</td>
+                    <td className="v3">9993433</td>
                   </tr>
                   <tr>
-                    <td class="n3">Vessel Name</td>
-                    <td class="v3">EVERACNE</td>
+                    <td className="n3">Vessel Name</td>
+                    <td className="v3">EVERACNE</td>
                   </tr>
                   <tr>
-                    <td class="n3">Ship Type</td>
-                    <td class="v3" id="spv0">
+                    <td className="n3">Ship Type</td>
+                    <td className="v3" id="spv0">
                       Container Ship
                     </td>
                   </tr>
                   <tr>
-                    <td class="n3">Flag</td>
-                    <td class="v3">Singapore</td>
+                    <td className="n3">Flag</td>
+                    <td className="v3">Singapore</td>
                   </tr>
                   <tr>
-                    <td class="n3">Home Port</td>
-                    <td class="v3">
-                      <span class="ttt0" data-title="At anchor">
+                    <td className="n3">Home Port</td>
+                    <td className="v3">
+                      <span className="ttt0" data-title="At anchor">
                         India
                       </span>
                     </td>
