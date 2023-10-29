@@ -39,14 +39,14 @@ export function NewOrderForm({
             text={"Cargo Description"}
             type={"text"}
             placeholder={"Company furniture for renevation"}
-            onChangeInput={onHandleFragile} />
+            onChangeInput={onHandleDesc} />
         </div>
         <div className={styles.emailinput}>
           <InputWithLabel
             text={"Fragile"}
             type={"text"}
             placeholder={"Yes/No"}
-            onChangeInput={onHandleDesc} />
+            onChangeInput={onHandleFragile} />
         </div>
       
           <button>Next </button>

@@ -6,6 +6,7 @@ import styles from "./RoutesLayout.module.css";
 import { SelectRoutes } from "./SelectRoutes";
 import { useDispatch } from "react-redux";
 import { addRoutes } from "../../../../features/orders/orderSlice";
+import { useNavigate } from "react-router-dom";
 export default function RoutesLayout() {
   const apiKey = "d7ed84d83e949baab350dff74ab8e51d";
   const [fetchCoordinates, setFetchCoordinates] = useState(null);
@@ -64,10 +65,12 @@ export default function RoutesLayout() {
     get_lat_long();
   }, [fetchCoordinates]);
   const dispatch  = useDispatch();
+  const navigate = useNavigate();
 const dispatchPickUp = ()=>{
 console.log(pickUp,dropOff)
  
-  dispatch(addRoutes({pickUp,dropOff}))
+  dispatch(addRoutes({pickUp,dropOff}));
+navigate('/neworder/routes/ships');
 }
 
   return (

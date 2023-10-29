@@ -54,8 +54,8 @@
 }
 .attributes{
     justify-content: center;
-    margin-left: 2rem;
-    width: 80%;
+    /* margin-left: 15%; */
+    width: 100%;
     margin-top: 3rem;
     font-size: 14px;
     /* border: 1px solid red; */

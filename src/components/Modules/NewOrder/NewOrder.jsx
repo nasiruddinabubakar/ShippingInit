@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { addOrder } from "../../../features/orders/orderSlice";
 import { Header } from "../../UI/Header";
 import TopDown from "../../framer/TopDown";
@@ -50,12 +51,15 @@ export default function () {
     dispatch({ type: "SET_DESCRIPTION", payload: e.target.value });
   }
   const Dispatch = useDispatch();
+  const navigate = useNavigate();
 function onSubmitOrder(e){
   
 e.preventDefault();
 
   console.log(newOrder);
   Dispatch(addOrder(newOrder));
+  navigate('/neworder/routes');
+  
 
 }
   
@@ -85,8 +89,8 @@ e.preventDefault();
           onsetCons={onsetConsg}
           onHandleWeight={onHandleWeight}
           onHandleType={onHandleType}
-          onHandleFragile={onHandleFragile}
           onHandleDesc={onHandleDesc}
+          onHandleFragile={onHandleFragile}
           onSubmitOrder={onSubmitOrder}
         />
       </div>

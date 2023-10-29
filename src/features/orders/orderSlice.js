@@ -6,8 +6,8 @@ const initialState = {
     consigneeName: "", // String
     orderWeight: 0, // Number (assuming it's a weight value)
     orderType: "", // String
-    fragile: false, // Boolean (assuming it's a flag)
     orderDescription: "",
+    fragile: false, // Boolean (assuming it's a flag)
   }, // String
   shipId: "", // String
   companyName: "", // String
@@ -25,7 +25,7 @@ export const orderSlice = createSlice({
     addRoutes: (state, action) => {
       state.pickup = action.payload.pickUp;
       state.dropoff = action.payload.dropOff;
-      console.log(state.pickup);
+      
     },
     addShip: (state, action) => {
       state.shipId = action.payload.id;
