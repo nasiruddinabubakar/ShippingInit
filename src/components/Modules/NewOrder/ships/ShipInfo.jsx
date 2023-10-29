@@ -3,6 +3,7 @@ import { Header } from "../../../UI/Header";
 import { easeIn, motion } from "framer-motion";
 import Opacity from "../../../framer/Opacity";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 export default () => {
   return (
     <div className={styles.container}>
@@ -101,7 +102,9 @@ export default () => {
             </Opacity>
           </div>
         </div>
+        <Link style={{margin:"1rem auto"}} to="/neworder/checkout">
         <button className={styles.butt}>Confirm Ship <Check size={20}/></button>
+        </Link>
       </div>
     </div>
   );
@@ -109,59 +112,59 @@ export default () => {
 
 export const VoyageDetails = () => {
   return (
-    <div class="flx flex2">
-      <table class="aparams">
+    <div className="flx flex2">
+      <table className="aparams">
         <tbody>
           <tr>
-            <td class="n3">Predicted ETA</td>
-            <td class="v3">-</td>
+            <td className="n3">Predicted ETA</td>
+            <td className="v3">-</td>
           </tr>
           <tr>
-            <td class="n3">Distance / Time</td>
-            <td class="v3">-</td>
+            <td className="n3">Distance / Time</td>
+            <td className="v3">-</td>
           </tr>
           <tr>
-            <td class="n3">Course / Speed</td>
-            <td class="v3" id="spv0">
+            <td className="n3">Course / Speed</td>
+            <td className="v3" id="spv0">
               76.5° / 0.0 kn
             </td>
           </tr>
           <tr>
-            <td class="n3">Current draught</td>
-            <td class="v3">13.6 m</td>
+            <td className="n3">Current draught</td>
+            <td className="v3">13.6 m</td>
           </tr>
           <tr>
-            <td class="n3">Navigation Status</td>
-            <td class="v3">
-              <span class="ttt0" data-title="At anchor">
+            <td className="n3">Navigation Status</td>
+            <td className="v3">
+              <span className="ttt0" data-title="At anchor">
                 At anchor
               </span>
             </td>
           </tr>
 
           <tr>
-            <td class="n3">IMO / MMSI</td>
-            <td class="v3 v3np">9943267 / 563176600</td>
+            <td className="n3">IMO / MMSI</td>
+            <td className="v3 v3np">9943267 / 563176600</td>
           </tr>
           <tr>
-            <td class="n3">Callsign</td>
-            <td class="v3">9V7305</td>
+            <td className="n3">Callsign</td>
+            <td className="v3">9V7305</td>
           </tr>
           <tr>
-            <td class="n3">Flag</td>
-            <td class="v3">Singapore</td>
+            <td className="n3">Flag</td>
+            <td className="v3">Singapore</td>
           </tr>
           <tr>
-            <td class="n3">Length / Beam</td>
-            <td class="v3">400 / 62 m</td>
+            <td className="n3">Length / Beam</td>
+            <td className="v3">400 / 62 m</td>
           </tr>
           <tr>
-            <td class="n3">Current Port</td>
-            <td class="v3">India</td>
+            <td className="n3">Current Port</td>
+            <td className="v3">India</td>
           </tr>
           <tr>
-            <td class="n3">Next Port</td>
-            <td class="v3">Iran</td>
+            <td className="n3">Next Port</td>
+            <td className="v3">Iran</td>
           </tr>
         </tbody>
       </table>

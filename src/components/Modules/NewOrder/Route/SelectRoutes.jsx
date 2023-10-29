@@ -14,6 +14,7 @@ export const SelectRoutes = ({
   handleCoordinates,
   pickUpOrDropOff,
   setPickupOrDropOff,
+  dispatchPickUp
 }) => {
   const headings = ["Flip it", "Ship it", "Sell it"];
 
@@ -67,11 +68,11 @@ export const SelectRoutes = ({
                     onChangeInput={handleCoordinates}
                   />
                 </div>
-                <Link to ='/neworder/routes/ships'>
-                <button type="button" onClick={notify}>
+                {/* <Link to ='/neworder/routes/ships'> */}
+                <button type="button" onClick={dispatchPickUp}>
                   Confirm
                 </button>
-                </Link>
+              {/* /  </Link> */}
                 <ToastContainer />
               </>
             ) : (

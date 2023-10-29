@@ -42,7 +42,7 @@ const FeaturedShips = () => {
             <Details />
           </div>
           </OpacityDiv>
-          <CheckoutBox/>
+          {/* <CheckoutBox/> */}
         </div>
         
       </div>

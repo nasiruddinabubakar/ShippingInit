@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Map from "../Map/Map";
 import styles from "./RoutesLayout.module.css";
 import { SelectRoutes } from "./SelectRoutes";
+import { useDispatch } from "react-redux";
+import { addRoutes } from "../../../../features/orders/orderSlice";
 export default function RoutesLayout() {
   const apiKey = "d7ed84d83e949baab350dff74ab8e51d";
   const [fetchCoordinates, setFetchCoordinates] = useState(null);
@@ -61,6 +63,12 @@ export default function RoutesLayout() {
 
     get_lat_long();
   }, [fetchCoordinates]);
+  const dispatch  = useDispatch();
+const dispatchPickUp = ()=>{
+console.log(pickUp,dropOff)
+ 
+  dispatch(addRoutes({pickUp,dropOff}))
+}
 
   return (
     <div className={styles.app}>
@@ -69,6 +77,7 @@ export default function RoutesLayout() {
         handleCoordinates={handleCoordinates}
         pickUpOrDropOff={pickupOrDropOff}
         setPickupOrDropOff={setPickupOrDropOff}
+        dispatchPickUp= {dispatchPickUp}
       />
       {!pickupOrDropOff ? (
         dropOff ? (

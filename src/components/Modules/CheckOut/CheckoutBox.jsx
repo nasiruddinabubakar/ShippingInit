@@ -3,9 +3,9 @@ import styles from './CheckoutBox.module.css';
 export const CheckoutBox = () => {
     return (
       <div className={styles.summary_section}>
-        <div id={styles.sum}>
+        <div className={styles.sum}>
           <div className={styles.summary_section_heading}>Order Summary</div>
-          <div className={styles.checkout_summary}>
+          <div  className={styles.checkout_summary}>
             <div className={styles.checkout_summary_label}>
         
               <div className={styles.coupon}>

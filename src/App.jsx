@@ -5,6 +5,9 @@ import NewOrder from "./components/Modules/NewOrder/NewOrder";
 import RoutesLayout from "./components/Modules/NewOrder/Route/RoutesLayout";
 import FeaturedShips from "./components/Modules/NewOrder/ships/FeaturedShips";
 import { Layout } from "./components/Modules/UserPanel/Layout";
+import { CheckoutPanel } from "./components/Modules/CheckOut/CheckOutPanel";
+
+
  
 const router = createBrowserRouter([{
 
@@ -31,6 +34,10 @@ const router = createBrowserRouter([{
 {
   path:'/neworder/routes/ships/ship',
   element:<ShipInfo/>,
+},
+{
+  path:'/neworder/checkout',
+  element:<CheckoutPanel/>,
 }
 
 ])
@@ -40,7 +47,7 @@ function App() {
       
   </RouterProvider>
   
-  // return (<FeaturedShips/>
+  // return (<CheckoutPanel/>
   );
 }
 
