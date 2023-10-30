@@ -5,6 +5,7 @@ import TopDown from "../../framer/TopDown";
 import { NewOrderForm } from "./NewOrderForm";
 import { useReducer } from "react";
 import { useDispatch } from "react-redux";
+import { toast ,ToastContainer} from "react-toastify";
 const orderReducer = (state, { type, payload }) => {
   switch (type) {
     case "SET_NAME":
@@ -52,17 +53,23 @@ export default function () {
   }
   const Dispatch = useDispatch();
   const navigate = useNavigate();
-function onSubmitOrder(e){
-  
-e.preventDefault();
+  function onSubmitOrder(e) {
 
-  console.log(newOrder);
-  Dispatch(addOrder(newOrder));
-  navigate('/neworder/routes');
-  
+    e.preventDefault();
 
-}
-  
+    if (newOrder.consigneeName === "" || newOrder.orderWeight === 0 || newOrder.orderType === "" || newOrder.orderDescription === "") {
+      toast.error("Please Fill in Complete Details",{
+        position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+      });
+      return;
+    }
+    Dispatch(addOrder(newOrder));
+    navigate('/neworder/routes');
+
+
+  }
+
   return (
     <div className="Main">
       <Header />
@@ -93,6 +100,8 @@ e.preventDefault();
           onHandleFragile={onHandleFragile}
           onSubmitOrder={onSubmitOrder}
         />
+        <ToastContainer />
+
       </div>
     </div>
   );

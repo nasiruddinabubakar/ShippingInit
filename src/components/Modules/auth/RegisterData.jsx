@@ -19,6 +19,7 @@ const registerReducer = (state, { type, payload }) => {
 };
 
 export const RegisterData = () => {
+  const [isloading,setIsLoading] = useState(false);
   const [registerUser, dispatch] = useReducer(registerReducer, {
     name: "",
     mail: "",
@@ -65,11 +66,11 @@ export const RegisterData = () => {
       notify("Password Doesnt match");
       return;
     }
-    
+   try{ 
     const res = await postData('http://127.0.0.1:5000/api/users/register',registerUser);
     console.log(res.status);  
     
-
+   
     if(res.status==="failed"){
        
         toast.error(res.message,{
@@ -83,6 +84,15 @@ export const RegisterData = () => {
         position: toast.POSITION.TOP_RIGHT,
         className: "toast_message",
       })
+    }
+  }
+    catch(error){
+    if(error){
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast_message",
+      });
+    }
     }
     
   };
