@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import TopDown from "../../framer/TopDown";
 import { toast, ToastContainer } from "react-toastify";
 import SpinnerFullPage from "../../UI/SpinnerFullPage";
+import { postData } from "../../../utils/postData";
+
 
 export function LoginData() {
   const [mail, setMail] = useState("");
@@ -121,14 +123,4 @@ export const LoginForm = ({ onhandleEmail, onhandlePassword, handleLogin }) => {
     </TopDown>
   );
 };
-async function postData(url = "", data = {}) {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
 
-  return await response.json();
-}

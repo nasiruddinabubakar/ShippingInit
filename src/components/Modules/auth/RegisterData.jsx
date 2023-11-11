@@ -2,7 +2,7 @@ import { useReducer, useState } from "react";
 import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import RegisterForm from "./RegisterForm";
-
+import { postData } from "../../../utils/postData";
 const registerReducer = (state, { type, payload }) => {
   switch (type) {
     case "SET_NAME":
@@ -107,14 +107,4 @@ export const RegisterData = () => {
   );
 };
 
-async function postData(url = "", data = {}) {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-return await response.json();
- 
-}
+
