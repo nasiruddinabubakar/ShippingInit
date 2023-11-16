@@ -56,10 +56,10 @@ export default function RoutesLayout() {
 
         setPickUp(Location);
       } catch (error) {
-        // Handle errors here, such as displaying an error message to the user
+       
         console.error("An error occurred:", error);
       }
-      // You can handle the error here, such as displaying an error message to the user
+     
     }
 
     get_lat_long();

@@ -1,6 +1,49 @@
+import { useSelector } from 'react-redux';
 import styles from './CheckoutBox.module.css';
+import { postData } from '../../../utils/postData';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const CheckoutBox = () => {
+  const order = useSelector((state) => state.order);
+
+  async function ConfirmOrder(){
+    
+    
+    try {
+      const response =await postData("http://127.0.0.1:5000/api/orders/neworder",order);
+      console.log(response.json());
+      if(response.status==="failed"){
+       
+        toast.error(response.message,{
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        })
+        
+      }
+     if(response.status==='success') {
+      toast.success("Order Confirmed",{
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast_message",
+      })
+    }
+      
+    }
+    catch(error){
+      if(error){
+        toast.error(error.message, {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        });
+      }
+    }
+  
+  
+  }
+
+
+
+
+
     return (
       <div className={styles.summary_section}>
         <div className={styles.sum}>
@@ -16,9 +59,9 @@ export const CheckoutBox = () => {
             <div className={styles.total__price}>
               <div>Total</div> <div>0 PKR</div>
             </div>
-  
+      <ToastContainer/>
             <div>
-              <button className={styles.proceed}>Proceed to CHECKOUT</button>
+              <button className={styles.proceed} onClick={ConfirmOrder}>Proceed to CHECKOUT</button>
             </div>
           </div>
         </div>

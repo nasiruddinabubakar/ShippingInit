@@ -12,6 +12,10 @@ const registerReducer = (state, { type, payload }) => {
 
     case "SET_PASSWORD":
       return { ...state, password: payload };
+    case "SET_PHONE":
+      return { ...state, phone_no: payload };
+    case "SET_ADDRESS":
+      return { ...state, address: payload };
 
     default:
       return state;
@@ -24,6 +28,8 @@ export const RegisterData = () => {
     name: "",
     mail: "",
     password: "",
+    phone_no:"",
+    address:"",
   });
   const [temp, setTemp] = useState("");
 
@@ -47,6 +53,12 @@ export const RegisterData = () => {
 
     return regex.test(email);
   };
+  function onHandlePhone(e){
+    dispatch({ type: "SET_PHONE", payload: e.target.value });
+  }
+  function onHandleAddress(e){
+    dispatch({ type: "SET_ADDRESS", payload: e.target.value });
+  }
 
   async function handleRegister (e)  {
     e.preventDefault();
@@ -103,7 +115,10 @@ export const RegisterData = () => {
       onHandleMail={onHandleMail}
       onsetTemp={onsetTemp}
       onHandlePassword={onHandlePassword}
+      onHandlePhone={onHandlePhone}
+      onHandleAddress = {onHandleAddress}
     />
+    
   );
 };
 

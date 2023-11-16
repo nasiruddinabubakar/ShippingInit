@@ -5,7 +5,7 @@ header{
     /* box-shadow: 0px 0px 4px 0px  var(--color-brand--2); */
     align-items: center;
     border:none ;
-    border-bottom: 1px solid rgb(209, 204, 204);
+    border-bottom: 1px solid rgb(63, 62, 62);
 }
 nav{
     position: relative;
