@@ -6,7 +6,8 @@ import RoutesLayout from "./components/Modules/NewOrder/Route/RoutesLayout";
 import FeaturedShips from "./components/Modules/NewOrder/ships/FeaturedShips";
 import { Layout } from "./components/Modules/UserPanel/Layout";
 import { CheckoutPanel } from "./components/Modules/CheckOut/CheckOutPanel";
-
+import { Suspense } from "react";
+import SpinnerFullPage from "./components/UI/SpinnerFullPage";
 
  
 const router = createBrowserRouter([{
@@ -33,7 +34,11 @@ const router = createBrowserRouter([{
 },
 {
   path:'/neworder/routes/ships/ship',
-  element:<ShipInfo/>,
+  element: (
+    <Suspense fallback={<SpinnerFullPage />}>
+      <ShipInfo />
+    </Suspense>
+  ),
 },
 {
   path:'/neworder/checkout',

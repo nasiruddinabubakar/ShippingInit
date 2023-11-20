@@ -9,10 +9,11 @@ const initialState = {
     orderDescription: "",
     fragile: false, // Boolean (assuming it's a flag)
   }, // String
-  shipId: "", // String
-  companyName: "", // String
-  pickup: "", // String
-  dropoff: "", // String
+  route: {
+    shipId: "", // Stringw
+    pickup: "", // String
+    dropoff: "", // String
+  },
 };
 
 export const orderSlice = createSlice({
@@ -23,19 +24,16 @@ export const orderSlice = createSlice({
       state.order = action.payload;
     },
     addRoutes: (state, action) => {
-      state.pickup = action.payload.pickUp;
-      state.dropoff = action.payload.dropOff;
-      
+      state.route.pickup = action.payload.pickUp;
+      state.route.dropoff = action.payload.dropOff;
     },
     addShip: (state, action) => {
-      state.shipId = action.payload.id;
-      state.companyName = action.payload.name;
-
+      state.route.shipId = action.payload.shipId;
       
     },
   },
 });
 
-export const { addOrder, addRoutes } = orderSlice.actions;
+export const { addOrder, addRoutes, addShip } = orderSlice.actions;
 
 export default orderSlice.reducer;

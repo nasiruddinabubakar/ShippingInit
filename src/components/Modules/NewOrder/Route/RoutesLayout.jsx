@@ -67,7 +67,7 @@ export default function RoutesLayout() {
   const dispatch  = useDispatch();
   const navigate = useNavigate();
 const dispatchPickUp = ()=>{
-console.log(pickUp,dropOff)
+
  
   dispatch(addRoutes({pickUp,dropOff}));
 navigate('/neworder/routes/ships');
