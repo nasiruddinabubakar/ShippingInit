@@ -5,7 +5,7 @@ import Map from "../Map/Map";
 import styles from "./RoutesLayout.module.css";
 import { SelectRoutes } from "./SelectRoutes";
 import { useDispatch } from "react-redux";
-import { addRoutes } from "../../../../features/orders/orderSlice";
+import { addDropoff,addPickup } from "../../../../features/orders/orderSlice";
 import { useNavigate } from "react-router-dom";
 export default function RoutesLayout() {
   const apiKey = "d7ed84d83e949baab350dff74ab8e51d";
@@ -13,23 +13,21 @@ export default function RoutesLayout() {
   const [dropOff, setDropOff] = useState(null);
   const [pickUp, setPickUp] = useState(null);
   const [pickupOrDropOff, setPickupOrDropOff] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let routesArr = [];
   function handlePickupOrDropOff() {
+   
+    dispatch(addDropoff({dropOff:fetchCoordinates}));
     setPickupOrDropOff(true);
   }
-  //   const debounce = (func, delay) => {
-  //     let timeoutId;
-  //     return (...args) => {
-  //       clearTimeout(timeoutId);
-  //       timeoutId = setTimeout(() => func(...args), delay);
-  //     };
-  //   };
-
-  // Handle coordinates input with debounce
+ 
   const handleCoordinates = (e) => {
+    
     setTimeout(() => {
       setFetchCoordinates(e.target.value);
       console.log(fetchCoordinates);
-    }, 2000);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -50,28 +48,31 @@ export default function RoutesLayout() {
           return;
         }
         if (!pickupOrDropOff) {
+          routesArr.push(fetchCoordinates);
+          console.log("dropOFF",fetchCoordinates);
           setDropOff(Location);
+         
           return;
+        } else {
+          setPickUp(Location);
+          console.log(fetchCoordinates);
+          dispatch(addPickup({pickUp:fetchCoordinates}));
+          console.log(routesArr);
         }
 
-        setPickUp(Location);
+      
       } catch (error) {
-       
         console.error("An error occurred:", error);
       }
-     
     }
 
     get_lat_long();
   }, [fetchCoordinates]);
-  const dispatch  = useDispatch();
-  const navigate = useNavigate();
-const dispatchPickUp = ()=>{
-
- 
-  dispatch(addRoutes({pickUp,dropOff}));
-navigate('/neworder/routes/ships');
-}
+  
+  const dispatchPickUp = () => {
+   
+    navigate("/neworder/routes/ships");
+  };
 
   return (
     <div className={styles.app}>
@@ -79,8 +80,8 @@ navigate('/neworder/routes/ships');
         dropOff={dropOff}
         handleCoordinates={handleCoordinates}
         pickUpOrDropOff={pickupOrDropOff}
-        setPickupOrDropOff={setPickupOrDropOff}
-        dispatchPickUp= {dispatchPickUp}
+        handlePickupOrDropOff={handlePickupOrDropOff}
+        dispatchPickUp={dispatchPickUp}
       />
       {!pickupOrDropOff ? (
         dropOff ? (

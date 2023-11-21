@@ -23,8 +23,11 @@ export const orderSlice = createSlice({
     addOrder: (state, action) => {
       state.order = action.payload;
     },
-    addRoutes: (state, action) => {
+    addPickup: (state, action) => {
       state.route.pickup = action.payload.pickUp;
+      
+    },
+    addDropoff:(state,action)=>{
       state.route.dropoff = action.payload.dropOff;
     },
     addShip: (state, action) => {
@@ -34,6 +37,6 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { addOrder, addRoutes, addShip } = orderSlice.actions;
+export const { addOrder, addPickup, addDropoff, addShip } = orderSlice.actions;
 
 export default orderSlice.reducer;

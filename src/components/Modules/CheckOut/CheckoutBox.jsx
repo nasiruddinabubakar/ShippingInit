@@ -6,15 +6,22 @@ import { ToastContainer, toast } from "react-toastify";
 export const CheckoutBox = () => {
   const order = useSelector((state) => state.order);
   const route = useSelector((state) => state.route);
-
+  const authToken = localStorage.getItem("user");
   async function ConfirmOrder() {
     console.log({ order, route });
     try {
-      const response = await postData(
+      const response = await fetch(
         "http://127.0.0.1:5000/api/orders/neworder",
-        { order, route }
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${authToken}`,
+          },
+          body: JSON.stringify({ order, route }),
+        }
       );
-      
+        console.log(response);
       if (response.status === "failed") {
         toast.error(response.message, {
           position: toast.POSITION.TOP_RIGHT,

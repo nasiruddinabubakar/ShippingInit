@@ -13,7 +13,7 @@ export const SelectRoutes = ({
   dropOff,
   handleCoordinates,
   pickUpOrDropOff,
-  setPickupOrDropOff,
+  handlePickupOrDropOff,
   dispatchPickUp
 }) => {
   const headings = ["Flip it", "Ship it", "Sell it"];
@@ -79,7 +79,7 @@ export const SelectRoutes = ({
               <>
                 {" "}
                
-                <button type="button" onClick={setPickupOrDropOff}>
+                <button type="button" onClick={handlePickupOrDropOff}>
                   Confirm
                 </button>
                
