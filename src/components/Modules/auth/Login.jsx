@@ -61,5 +61,5 @@ export function ToggleLoginSignup({ onHandleLogin, isLogin }) {
         </>
       )}
     </section>
-  );
+  );
 }

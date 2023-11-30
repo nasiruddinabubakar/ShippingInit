@@ -10,7 +10,7 @@ export const CheckoutBox = () => {
   async function ConfirmOrder() {
     console.log({ order, route });
     try {
-      const response = await fetch(
+      const res = await fetch(
         "http://127.0.0.1:5000/api/orders/neworder",
         {
           method: "POST",
@@ -21,7 +21,7 @@ export const CheckoutBox = () => {
           body: JSON.stringify({ order, route }),
         }
       );
-        console.log(response);
+        const response = await res
       if (response.status === "failed") {
         toast.error(response.message, {
           position: toast.POSITION.TOP_RIGHT,

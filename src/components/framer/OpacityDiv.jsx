@@ -2,7 +2,7 @@ import { motion ,easeIn} from "framer-motion";
 
 const OpacityDiv= ({ children,time }) => {
   return (
-    <motion.div
+    <motion.div 
      
       initial={{ opacity: 0 ,}}
       animate={{ opacity: 1 }}

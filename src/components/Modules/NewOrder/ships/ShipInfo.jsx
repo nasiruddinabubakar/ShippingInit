@@ -8,6 +8,16 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addShip } from "../../../../features/orders/orderSlice";
 import SpinnerFullPage from "../../../UI/SpinnerFullPage";
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import StepContent from '@mui/material/StepContent';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { StepConnector } from '@mui/material';
+
 
 export default () => {
   const [imageData, setImageData] = useState([]);
@@ -153,7 +163,7 @@ export default () => {
                     {" "}
                     <h2 className={styles.bar}>Route Information</h2>
                   </div>
-                  <VoyageDetails />
+                 < VerticalLinearStepper/>
                 </Opacity>
               </div>
             </div>
@@ -229,3 +239,57 @@ export const VoyageDetails = () => {
     </div>
   );
 };
+  function VerticalLinearStepper() {
+  
+  const steps = [
+    {
+      label: 'Pakistan',
+    
+    },
+    {
+      label: 'China',
+      
+    },
+    {
+      label: 'Russia',
+     
+    },
+    {
+      label: 'Ukraine',
+     
+    },
+  ];
+    const [activeStep, setActiveStep] = useState(0);
+  
+    return (
+      <Box sx={{ maxWidth: 400,fontSize:'28px' }}>
+    <Stepper activeStep={activeStep} orientation="vertical"
+    connector={<StepConnector style={{ height: '20px' }} />}
+    >
+      {steps.map((step, index) => (
+        <Step key={step.label}>
+          <StepLabel
+            
+            StepIconProps={{
+              style: {
+                color: "#00c46a",
+                 // Set your desired icon color
+              },
+            }}
+          >
+            <Typography style={{ color: '#d6dee0' }}>{step.label}</Typography>
+          </StepLabel>
+          <StepContent>
+            <Typography>{step.description}</Typography>
+           
+          </StepContent>
+        </Step>
+      ))}
+    </Stepper>
+    
+  </Box>
+  
+    
+    );
+  }
+  
