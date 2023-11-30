@@ -65,7 +65,7 @@ const FeaturedShips = () => {
                 <div className={styles.shipdiv}>
                   <img src={item.image} />
                 </div>
-                <Details day={item.timeTaken} name={item.name} />
+                <Details day={item.timeTaken} name={item.name} id ={item.ship_id} />
               </div>
             ))}
 
@@ -77,7 +77,7 @@ const FeaturedShips = () => {
   );
 };
 
-export const Details = ({ day ,name}) => {
+export const Details = ({ day ,name,id}) => {
   return (
     <div className={styles.sexy}>
       <div>
@@ -89,7 +89,7 @@ export const Details = ({ day ,name}) => {
           <h3>Delivering in {day} days</h3>
         </div>
       </div>
-      <Link to={"/neworder/routes/ships/ship"}>
+      <Link to={`/neworder/routes/ships/${id}`}>
         <div className={styles.detailbtn}>
           <button>Details</button>
         </div>

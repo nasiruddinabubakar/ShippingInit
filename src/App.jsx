@@ -33,7 +33,7 @@ const router = createBrowserRouter([{
   element:<FeaturedShips/>,
 },
 {
-  path:'/neworder/routes/ships/ship',
+  path:'/neworder/routes/ships/:id',
   element: (
     <Suspense fallback={<SpinnerFullPage />}>
       <ShipInfo />

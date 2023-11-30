@@ -3,7 +3,7 @@ import { Header } from "../../../UI/Header";
 import { easeIn, motion } from "framer-motion";
 import Opacity from "../../../framer/Opacity";
 import { Check } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addShip } from "../../../../features/orders/orderSlice";
@@ -23,7 +23,9 @@ export default () => {
   const [imageData, setImageData] = useState([]);
   const [shipDetails, setShipDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const params = useParams();
+  const id = params.id;
+  console.log(id);
   useEffect(() => {
     async function getShips() {
       setIsLoading(true);
@@ -33,9 +35,13 @@ export default () => {
           {
             cache: "no-store", // Disable caching
             mode: "cors", // Enable cross-origin resource sharing
+            headers:{
+              shipID:id
+            }
           }
         );
         const data = await response.json();
+        console.log(data);
         const { image } = data;
         setShipDetails((state) => data);
 
@@ -51,7 +57,7 @@ export default () => {
         reader.readAsDataURL(blob);
         setIsLoading(false);
       } catch (Err) {
-        console.error("error occured");
+        console.error("error occured ",Err.message);
       }
     }
 
@@ -59,6 +65,8 @@ export default () => {
   }, []);
   const navigate = useNavigate();
   const dispacth = useDispatch();
+ 
+
   function onConfirmShip() {
     console.log(shipDetails);
 
