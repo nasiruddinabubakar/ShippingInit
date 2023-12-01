@@ -21,7 +21,7 @@ export const CheckoutBox = () => {
           body: JSON.stringify({ order, route }),
         }
       );
-        const response = await res
+        const response = await res.json();
       if (response.status === "failed") {
         toast.error(response.message, {
           position: toast.POSITION.TOP_RIGHT,

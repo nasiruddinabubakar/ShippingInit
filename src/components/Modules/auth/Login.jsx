@@ -12,19 +12,33 @@ export const Login = () => {
   const LoginRegister = isLogin ? LoginData : RegisterData;
   const navigate = useNavigate();
   useEffect(() => {
-    // setIsLoading((isloading) => true);
-    const authToken = localStorage.getItem("user");
-    if (authToken) {
-      console.log(authToken);
-      setTimeout(() => {
-        navigate("/user/dashboard");
-      }, 300);
+    async function verifyToken() {
+      const authToken = localStorage.getItem("user");
+      if (authToken) {
+        const res = await fetch(
+          "http://127.0.0.1:5000/api/users/authorization",
+          {
+            headers: {
+              authorization: authToken,
+            },
+          }
+        );
+        const response = await res.json();
+          console.log(response);
+        if (response.status === "failed") {
+          setIsLoading((isloading) => false);
+        } else {
+          setTimeout(() => {
+            navigate("/user/dashboard");
+          }, 300);
+        }
+      } else {
+        setTimeout(() => {
+          setIsLoading((isloading) => false);
+        }, 500);
+      }
     }
-    else{
-      setTimeout(()=>{
-        setIsLoading((isloading)=>false)
-      },500);
-    }
+    verifyToken();
   }, []);
 
   function onHandleLogin() {
@@ -61,5 +75,5 @@ export function ToggleLoginSignup({ onHandleLogin, isLogin }) {
         </>
       )}
     </section>
-  );
+  );
 }
