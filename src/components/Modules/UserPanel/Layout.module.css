@@ -84,7 +84,7 @@ li{
     grid-column-gap: 2.4rem; 
     align-items: center;
      border-bottom: 1px solid #343a40;
-    border-bottom: 1px solid var(--color-background-100);
+    /* border-bottom: 1px solid var); */
     -webkit-column-gap: 2.4rem;
     column-gap: 2.4rem;
     display: grid;
@@ -93,7 +93,14 @@ li{
     grid-template-rows: auto auto;
     padding: 1.6rem 3.2rem;
     position: relative;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
+li:hover{
+    transition: 0.2s ease;
+    background-color: #343a40;
+}
+
 .list img {
     grid-row: 1/-1;
     width: 100%;

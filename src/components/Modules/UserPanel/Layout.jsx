@@ -4,9 +4,26 @@ import { HeaderLogout } from "../../UI/HeaderLogout";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Spinner from "../../UI/Spinner";
+import React from "react";
+import Popup from "reactjs-popup";
+import { toast } from "react-toastify";
+// import "reactjs-popup/dist/index.css";
 export const Layout = () => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
+  const handleListItemClick = (order) => {
+    setSelectedOrder(order);
+    setIsPopupOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setSelectedOrder(null);
+    setIsPopupOpen(false);
+  };
 
   useEffect(() => {
     async function getOrders() {
@@ -49,7 +66,7 @@ export const Layout = () => {
               ) : (
                 orders.map((item) => {
                   return (
-                    <li>
+                    <li onClick={() => handleListItemClick(item)}>
                       <h3>{item.consignee_name}</h3>
                       <div>
                         <p>
@@ -61,6 +78,20 @@ export const Layout = () => {
                 })
               )}
             </ul>
+            <Popup
+              className="popup"
+              open={isPopupOpen}
+              onClose={handlePopupClose}
+            >
+              <div>
+                {selectedOrder && (
+                  <div className="papa">
+                    <OrderPopup item={selectedOrder} />
+                    <button className="delete-order">Delete Order</button>
+                  </div>
+                )}
+              </div>
+            </Popup>
           </div>
 
           <div className={styles.box}>
@@ -83,5 +114,55 @@ export const Layout = () => {
         </Link>
       </div>
     </div>
+  );
+};
+
+const OrderPopup = ({ item }) => {
+  const [order, setOrder] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    async function getOrderDetails() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `http://127.0.0.1:5000/api/orders/${item.booking_id}`,
+          {
+            headers: {
+              authorization: `${localStorage.getItem("user")}`,
+            },
+          }
+        );
+        const response = await res.json();
+        setOrder(response.booking);
+        setIsLoading(false);
+      } catch (err) {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        });
+        setIsLoading(false);
+      }
+    }
+    getOrderDetails();
+  }, []);
+
+  return (
+    <>
+      {" "}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <h3> Consignee Name : {item.consignee_name}</h3>
+          <p>
+            Route : {item.pickup} -- {item.dropoff}
+          </p>
+          <p>Weight : {order.weight_in_tonne} Tonnes</p>
+          <p>Ship : {order.name}</p>
+          <p>Company mail : {order.email}</p>
+          {/* Add other order details as needed */}
+        </>
+      )}
+    </>
   );
 };
