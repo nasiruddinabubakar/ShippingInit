@@ -5,19 +5,18 @@ import Opacity from "../../../framer/Opacity";
 import { Check } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addShip } from "../../../../features/orders/orderSlice";
 import SpinnerFullPage from "../../../UI/SpinnerFullPage";
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import { StepConnector } from '@mui/material';
-
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import StepContent from "@mui/material/StepContent";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { StepConnector } from "@mui/material";
 
 export default () => {
   const [imageData, setImageData] = useState([]);
@@ -35,9 +34,9 @@ export default () => {
           {
             cache: "no-store", // Disable caching
             mode: "cors", // Enable cross-origin resource sharing
-            headers:{
-              shipID:id
-            }
+            headers: {
+              shipID: id,
+            },
           }
         );
         const data = await response.json();
@@ -57,7 +56,7 @@ export default () => {
         reader.readAsDataURL(blob);
         setIsLoading(false);
       } catch (Err) {
-        console.error("error occured ",Err.message);
+        console.error("error occured ", Err.message);
       }
     }
 
@@ -65,12 +64,15 @@ export default () => {
   }, []);
   const navigate = useNavigate();
   const dispacth = useDispatch();
- 
 
+  const days = useSelector((state) => state.days);
+  const weight = useSelector((state) => state.order.orderWeight);
+  const price = Math.round(shipDetails.price_per_tonne * weight * (0.2 * days));
+  const { pickup, dropoff } = useSelector((State) => State.route);
   function onConfirmShip() {
     console.log(shipDetails);
 
-    dispacth(addShip({ shipId: shipDetails.ship_id }));
+    dispacth(addShip({ shipId: shipDetails.ship_id,price:price }));
 
     navigate("/neworder/checkout");
   }
@@ -96,10 +98,38 @@ export default () => {
                 <Opacity time={2}>
                   <div style={{ borderRadius: "1.5rem" }}>
                     {" "}
-                    <h2 className={styles.bar}>Voyage Information</h2>
+                    <h2 className={styles.bar}>Ship Information</h2>
                   </div>
-
-                  <VoyageDetails />
+                  <div class="flx flex2">
+                    <table class="aparams">
+                      <div className="outer-table">
+                        <div className="table-div">
+                          <div className="">Ship Name : </div>
+                          <div className="">{shipDetails.name}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Gross tonnage : </div>
+                          <div className="">{shipDetails.capacity}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Price per tonne : </div>
+                          <div className="">{shipDetails.price_per_tonne}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Current tonnage : </div>
+                          <div className="">{shipDetails.currentWeight}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Build Year : </div>
+                          <div className="">{shipDetails.build_year}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Home Port : </div>
+                          <div className="">{shipDetails.start_country}</div>
+                        </div>
+                      </div>
+                    </table>
+                  </div>
                 </Opacity>
               </div>
             </div>
@@ -108,59 +138,28 @@ export default () => {
                 <Opacity time={2}>
                   <div>
                     {" "}
-                    <h2 className={styles.bar}>Ship Information</h2>
+                    <h2 className={styles.bar}>Company Information</h2>
                   </div>
                   <div class="flx flex2">
                     <table class="aparams">
-                      <tbody>
-                        <tr>
-                          <td className="n3">IMO</td>
-                          <td className="v3">9993433</td>
-                        </tr>
-                        <tr>
-                          <td className="n3">Vessel Name</td>
-                          <td className="v3">EVERACNE</td>
-                        </tr>
-                        <tr>
-                          <td className="n3">Ship Type</td>
-                          <td className="v3" id="spv0">
-                            Container Ship
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="n3">Flag</td>
-                          <td className="v3">Singapore</td>
-                        </tr>
-                        <tr>
-                          <td className="n3">Home Port</td>
-                          <td className="v3">
-                            <span className="ttt0" data-title="At anchor">
-                              India
-                            </span>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td class="n3">Gross Tonnage </td>
-                          <td class="v3 v3np">236000</td>
-                        </tr>
-                        <tr>
-                          <td class="n3">Length Overall</td>
-                          <td class="v3">400m</td>
-                        </tr>
-                        <tr>
-                          <td class="n3">Year of Build</td>
-                          <td class="v3">2022</td>
-                        </tr>
-                        <tr>
-                          <td class="n3">Company Name</td>
-                          <td class="v3">Forex Shippers</td>
-                        </tr>
-                        <tr>
-                          <td class="n3">Manager mail</td>
-                          <td class="v3">alinaqi@gmail.com</td>
-                        </tr>
-                      </tbody>
+                    <div className="outer-table">
+                        <div className="table-div">
+                          <div className="n3">Company Name : </div>
+                          <div className="v3">{shipDetails.Company_Name}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="n3">Company Email : </div>
+                          <div className="v3">{shipDetails.email}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="n3">Company Phone : </div>
+                          <div className="v3">0{shipDetails.phone_number}</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="n3">Company Country : </div>
+                          <div className="v3">{shipDetails.country}</div>
+                        </div>
+                      </div>
                     </table>
                   </div>
                 </Opacity>
@@ -171,7 +170,28 @@ export default () => {
                     {" "}
                     <h2 className={styles.bar}>Route Information</h2>
                   </div>
-                 < VerticalLinearStepper/>
+                  <div className="flx flex2">
+                    <table className="aparams">
+                      <div className="outer-table">
+                        <div className="table-div">
+                          <div className="">Pickup Country : </div>
+                          <div className="">{pickup} </div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Dropoff Country : </div>
+                          <div className="">{dropoff} </div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Predicted ETA : </div>
+                          <div className="">{days} days</div>
+                        </div>
+                        <div className="table-div">
+                          <div className="">Price : </div>
+                          <div className="">{price} Pkr</div>
+                        </div>
+                      </div>
+                    </table>
+                  </div>
                 </Opacity>
               </div>
             </div>
@@ -195,109 +215,53 @@ export const VoyageDetails = () => {
             <td className="n3">Predicted ETA</td>
             <td className="v3">-</td>
           </tr>
-          <tr>
-            <td className="n3">Distance / Time</td>
-            <td className="v3">-</td>
-          </tr>
-          <tr>
-            <td className="n3">Course / Speed</td>
-            <td className="v3" id="spv0">
-              76.5° / 0.0 kn
-            </td>
-          </tr>
-          <tr>
-            <td className="n3">Current draught</td>
-            <td className="v3">13.6 m</td>
-          </tr>
-          <tr>
-            <td className="n3">Navigation Status</td>
-            <td className="v3">
-              <span className="ttt0" data-title="At anchor">
-                At anchor
-              </span>
-            </td>
-          </tr>
-
-          <tr>
-            <td className="n3">IMO / MMSI</td>
-            <td className="v3 v3np">9943267 / 563176600</td>
-          </tr>
-          <tr>
-            <td className="n3">Callsign</td>
-            <td className="v3">9V7305</td>
-          </tr>
-          <tr>
-            <td className="n3">Flag</td>
-            <td className="v3">Singapore</td>
-          </tr>
-          <tr>
-            <td className="n3">Length / Beam</td>
-            <td className="v3">400 / 62 m</td>
-          </tr>
-          <tr>
-            <td className="n3">Current Port</td>
-            <td className="v3">India</td>
-          </tr>
-          <tr>
-            <td className="n3">Next Port</td>
-            <td className="v3">Iran</td>
-          </tr>
         </tbody>
       </table>
     </div>
   );
 };
-  function VerticalLinearStepper() {
-  
+function VerticalLinearStepper() {
   const steps = [
     {
-      label: 'Pakistan',
-    
+      label: "Pakistan",
     },
     {
-      label: 'China',
-      
+      label: "China",
     },
     {
-      label: 'Russia',
-     
+      label: "Russia",
     },
     {
-      label: 'Ukraine',
-     
+      label: "Ukraine",
     },
   ];
-    const [activeStep, setActiveStep] = useState(0);
-  
-    return (
-      <Box sx={{ maxWidth: 400,fontSize:'28px' }}>
-    <Stepper activeStep={activeStep} orientation="vertical"
-    connector={<StepConnector style={{ height: '20px' }} />}
-    >
-      {steps.map((step, index) => (
-        <Step key={step.label}>
-          <StepLabel
-            
-            StepIconProps={{
-              style: {
-                color: "#00c46a",
-                 // Set your desired icon color
-              },
-            }}
-          >
-            <Typography style={{ color: '#d6dee0' }}>{step.label}</Typography>
-          </StepLabel>
-          <StepContent>
-            <Typography>{step.description}</Typography>
-           
-          </StepContent>
-        </Step>
-      ))}
-    </Stepper>
-    
-  </Box>
-  
-    
-    );
-  }
-  
+  const [activeStep, setActiveStep] = useState(0);
+
+  return (
+    <Box sx={{ maxWidth: 400, fontSize: "28px" }}>
+      <Stepper
+        activeStep={activeStep}
+        orientation="vertical"
+        connector={<StepConnector style={{ height: "20px" }} />}
+      >
+        {steps.map((step, index) => (
+          <Step key={step.label}>
+            <StepLabel
+              StepIconProps={{
+                style: {
+                  color: "#00c46a",
+                  // Set your desired icon color
+                },
+              }}
+            >
+              <Typography style={{ color: "#d6dee0" }}>{step.label}</Typography>
+            </StepLabel>
+            <StepContent>
+              <Typography>{step.description}</Typography>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
+  );
+}

@@ -65,7 +65,46 @@ export const Layout = () => {
                 <Spinner />
               ) : (
                 orders.map((item) => {
-                  return (
+                  return item.delivered ? (
+                    <li onClick={() => handleListItemClick(item)}>
+                      <h3>{item.consignee_name}</h3>
+                      <div>
+                        <p>
+                          {item.pickup} -- {item.dropoff}
+                        </p>
+                      </div>
+                    </li>
+                  ) : (
+                    <></>
+                  );
+                })
+              )}
+            </ul>
+            <Popup
+              className="popup"
+              open={isPopupOpen}
+              onClose={handlePopupClose}
+            >
+              <div>
+                {selectedOrder && (
+                  <div className="papa">
+                    <OrderPopup item={selectedOrder} />
+                    <button className="delete-order">Delete Order</button>
+                  </div>
+                )}
+              </div>
+            </Popup>
+          </div>
+
+          <div className={styles.box}>
+            <ul className={styles.list}>
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                orders.map((item) => {
+                  return item.delivered ? (
+                    <></>
+                  ) : (
                     <li onClick={() => handleListItemClick(item)}>
                       <h3>{item.consignee_name}</h3>
                       <div>
@@ -92,17 +131,6 @@ export const Layout = () => {
                 )}
               </div>
             </Popup>
-          </div>
-
-          <div className={styles.box}>
-            <ul className={styles.list}>
-              <li>
-                <h3>ID 2233</h3>
-                <div>
-                  <p>Hermes Titanic</p>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

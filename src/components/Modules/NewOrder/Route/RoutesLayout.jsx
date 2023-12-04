@@ -5,8 +5,9 @@ import Map from "../Map/Map";
 import styles from "./RoutesLayout.module.css";
 import { SelectRoutes } from "./SelectRoutes";
 import { useDispatch } from "react-redux";
-import { addDropoff,addPickup } from "../../../../features/orders/orderSlice";
+import { addDropoff, addPickup } from "../../../../features/orders/orderSlice";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 export default function RoutesLayout() {
   const apiKey = "d7ed84d83e949baab350dff74ab8e51d";
   const [fetchCoordinates, setFetchCoordinates] = useState(null);
@@ -17,17 +18,23 @@ export default function RoutesLayout() {
   const navigate = useNavigate();
   let routesArr = [];
   function handlePickupOrDropOff() {
-   
-    dispatch(addDropoff({dropOff:fetchCoordinates}));
+    if (fetchCoordinates.length < 4) {
+      toast.error("Please Enter Country Name", {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast_message",
+      });
+
+      return;
+    }
+    dispatch(addDropoff({ dropOff: fetchCoordinates }));
     setPickupOrDropOff(true);
   }
- 
+
   const handleCoordinates = (e) => {
-    
     setTimeout(() => {
       setFetchCoordinates(e.target.value);
       console.log(fetchCoordinates);
-    }, 1000);
+    }, 50);
   };
 
   useEffect(() => {
@@ -49,18 +56,16 @@ export default function RoutesLayout() {
         }
         if (!pickupOrDropOff) {
           routesArr.push(fetchCoordinates);
-          console.log("dropOFF",fetchCoordinates);
+          console.log("dropOFF", fetchCoordinates);
           setDropOff(Location);
-         
+
           return;
         } else {
           setPickUp(Location);
-          console.log(fetchCoordinates);
-          dispatch(addPickup({pickUp:fetchCoordinates}));
+          
+          dispatch(addPickup({ pickUp: fetchCoordinates }));
           console.log(routesArr);
         }
-
-      
       } catch (error) {
         console.error("An error occurred:", error);
       }
@@ -68,14 +73,22 @@ export default function RoutesLayout() {
 
     get_lat_long();
   }, [fetchCoordinates]);
-  
+
   const dispatchPickUp = () => {
-   
+    if (fetchCoordinates.length < 4) {
+      toast.error("Please Enter Country Name", {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast_message",
+      });
+
+      return;
+    }
     navigate("/neworder/routes/ships");
   };
 
   return (
     <div className={styles.app}>
+      <ToastContainer />
       <SelectRoutes
         dropOff={dropOff}
         handleCoordinates={handleCoordinates}

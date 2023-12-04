@@ -14,6 +14,8 @@ const initialState = {
     pickup: "", // String
     dropoff: "", // String
   },
+  days:0,
+  price:0
 };
 
 export const orderSlice = createSlice({
@@ -32,11 +34,14 @@ export const orderSlice = createSlice({
     },
     addShip: (state, action) => {
       state.route.shipId = action.payload.shipId;
-      
+      state.price = action.payload.price;
     },
+    addDay:(state,action)=>{
+      state.days=action.payload.days;
+    }
   },
 });
 
-export const { addOrder, addPickup, addDropoff, addShip } = orderSlice.actions;
+export const { addOrder, addPickup, addDropoff, addShip,addDay } = orderSlice.actions;
 
 export default orderSlice.reducer;

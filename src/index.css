@@ -90,17 +90,14 @@ tr {
   padding: 3px 2px;
   line-height: 18px;
 }
-.tparams tr>td, .aparams tr>td {
-  padding: 3px 15px 3px 2px;
-  line-height: 18px;
-}
+
 .n3 {
   opacity: 0.7;
   color: var(--color-brand--2);
   width: 50%;
 }
 .flex2{
- 
+ height: 100%;
   margin:2rem;
 }
 /* .text-section {
@@ -191,4 +188,35 @@ tr {
   transition: 0.32s ease;
   background-color: var(--color-brand--1);
   color: black;
+}
+.table-div{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  font-size: 1.7rem;
+}
+.table-div :first-child{
+  font-family: inherit;
+ 
+  opacity: 0.7;
+  display: flex;
+  flex-direction: row;
+  color: #00c46a;
+}
+.outer-table{
+  margin-top: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: space-between;
+}
+@media screen and (max-width:1600px){
+  .table-div{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    font-size: 1.2rem;
+  }
+
 }

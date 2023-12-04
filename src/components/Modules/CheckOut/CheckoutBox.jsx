@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 export const CheckoutBox = () => {
   const order = useSelector((state) => state.order);
   const route = useSelector((state) => state.route);
+  const price = useSelector((State)=>State.price);
+  const days = useSelector((State)=>State.days);
   const authToken = localStorage.getItem("user");
   async function ConfirmOrder() {
     console.log({ order, route });
@@ -18,7 +20,7 @@ export const CheckoutBox = () => {
             "Content-Type": "application/json",
             Authorization: `${authToken}`,
           },
-          body: JSON.stringify({ order, route }),
+          body: JSON.stringify({ order, route,days,price }),
         }
       );
         const response = await res.json();
@@ -56,12 +58,12 @@ export const CheckoutBox = () => {
             </div>
           </div>
           <div className={styles.total__price}>
-            <div>Total</div> <div>0 PKR</div>
+            <div>Total</div> <div>{price} PKR</div>
           </div>
           <ToastContainer />
           <div>
             <button className={styles.proceed} onClick={ConfirmOrder}>
-              Proceed to CHECKOUT
+              Confirm ORDER
             </button>
           </div>
         </div>

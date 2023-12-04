@@ -1,12 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../../../UI/Header";
 import styles from "./FeaturedShips.module.css";
 import OpacityDiv from "../../../framer/OpacityDiv";
 import { CheckoutBox } from "../../CheckOut/CheckoutBox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { postData } from "../../../../utils/postData";
 import SpinnerFullPage from "../../../UI/SpinnerFullPage";
+
+import { addDay } from "../../../../features/orders/orderSlice";
+import { toast,ToastContainer } from "react-toastify";
 const FeaturedShips = () => {
   const { pickup, dropoff } = useSelector((state) => state.route);
   const [shipArr, setShipArr] = useState([]);
@@ -25,8 +28,14 @@ const FeaturedShips = () => {
           }
         );
         const shipsData = response.ships;
-        console.log(response);
-
+          if(response.status==="failed"){
+            setIsLoading(false)
+            toast.error("No Ships Found", {
+              position: toast.POSITION.TOP_RIGHT,
+              className: "toast_message",
+            });
+          
+          }
         // Process the image data before setting the state
         const processedShipsData = shipsData.map((item) => {
           const { image } = item;
@@ -41,19 +50,33 @@ const FeaturedShips = () => {
         });
 
         setShipArr(processedShipsData);
+      
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching ships data:", error);
+        setIsLoading(false);
+        toast.error("Error Fetching Ships", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        });
       }
     }
 
     getShips();
   }, []);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function saveDay(id, day) {
+    dispatch(addDay({ days: day }));
+    navigate(`/neworder/routes/ships/${id}`);
+  }
+
   console.log(shipsData);
 
   return (
     <div className={styles.container}>
+      <ToastContainer/>
       <Header />
       {isLoading ? (
         <SpinnerFullPage />
@@ -65,10 +88,15 @@ const FeaturedShips = () => {
                 <div className={styles.shipdiv}>
                   <img src={item.image} />
                 </div>
-                <Details day={item.timeTaken} name={item.name} id ={item.ship_id} />
+                <Details
+                  day={item.timeTaken}
+                  name={item.name}
+                  id={item.ship_id}
+                  saveDay={saveDay}
+                />
               </div>
             ))}
-
+  
             {/* <CheckoutBox/> */}
           </div>
         </div>
@@ -77,7 +105,7 @@ const FeaturedShips = () => {
   );
 };
 
-export const Details = ({ day ,name,id}) => {
+export const Details = ({ day, name, id ,saveDay}) => {
   return (
     <div className={styles.sexy}>
       <div>
@@ -89,11 +117,10 @@ export const Details = ({ day ,name,id}) => {
           <h3>Delivering in {day} days</h3>
         </div>
       </div>
-      <Link to={`/neworder/routes/ships/${id}`}>
-        <div className={styles.detailbtn}>
-          <button>Details</button>
-        </div>
-      </Link>
+
+      <div className={styles.detailbtn}>
+        <button onClick={() => saveDay(id, day)}>Details</button>
+      </div>
     </div>
   );
 };

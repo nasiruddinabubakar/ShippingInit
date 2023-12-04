@@ -23,20 +23,20 @@ const registerReducer = (state, { type, payload }) => {
 };
 
 export const RegisterData = () => {
-  const [isloading,setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
   const [registerUser, dispatch] = useReducer(registerReducer, {
     name: "",
     mail: "",
     password: "",
-    phone_no:"",
-    address:"",
+    phone_no: "",
+    address: "",
   });
   const [temp, setTemp] = useState("");
 
-  function onsetTemp(e){
+  function onsetTemp(e) {
     setTemp(e.target.value);
   }
-  
+
   function onHandleName(e) {
     dispatch({ type: "SET_NAME", payload: e.target.value });
   }
@@ -53,14 +53,18 @@ export const RegisterData = () => {
 
     return regex.test(email);
   };
-  function onHandlePhone(e){
+  const validatePhone = (phone) => {
+    const phoneNumberRegex = /^03[0-9]{2}[-\s]?[0-9]{7}$/;
+    return phoneNumberRegex.test(phone);
+  };
+  function onHandlePhone(e) {
     dispatch({ type: "SET_PHONE", payload: e.target.value });
   }
-  function onHandleAddress(e){
+  function onHandleAddress(e) {
     dispatch({ type: "SET_ADDRESS", payload: e.target.value });
   }
 
-  async function handleRegister (e)  {
+  async function handleRegister(e) {
     e.preventDefault();
     const notify = (text) => {
       toast.error(text, {
@@ -68,46 +72,47 @@ export const RegisterData = () => {
         className: "toast_message",
       });
     };
-    console.log(validateEmail(registerUser.mail));
-    if (validateEmail(registerUser.mail) === false) {
-      notify("Email is not valid");
+    console.log(validatePhone(registerUser.phone_no));
+    if (
+      validateEmail(registerUser.mail) === false ||
+      validatePhone(registerUser.phone_no) === false
+    ) {
+      notify("Email or Phone is not valid");
       return;
     } else {
-    } 
+    }
     if (registerUser.password === "") {
       notify("Password Doesnt match");
       return;
     }
-   try{ 
-    const res = await postData('http://127.0.0.1:5000/api/users/register',registerUser);
-    console.log(res);  
-    
-   
-    if(res.status==="failed"){
-       
-        toast.error(res.message,{
+    try {
+      const res = await postData(
+        "http://127.0.0.1:5000/api/users/register",
+        registerUser
+      );
+      console.log(res);
+
+      if (res.status === "failed") {
+        toast.error(res.message, {
           position: toast.POSITION.TOP_RIGHT,
           className: "toast_message",
-        })
-        
+        });
       }
-     if(res.status==='success') {
-      toast.success("Account Created",{
-        position: toast.POSITION.TOP_RIGHT,
-        className: "toast_message",
-      })
+      if (res.status === "success") {
+        toast.success("Account Created", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        });
+      }
+    } catch (error) {
+      if (error) {
+        toast.error(error.message, {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        });
+      }
     }
   }
-    catch(error){
-    if(error){
-      toast.error(error.message, {
-        position: toast.POSITION.TOP_RIGHT,
-        className: "toast_message",
-      });
-    }
-    }
-    
-  };
   return (
     <RegisterForm
       handleRegister={handleRegister}
@@ -116,10 +121,7 @@ export const RegisterData = () => {
       onsetTemp={onsetTemp}
       onHandlePassword={onHandlePassword}
       onHandlePhone={onHandlePhone}
-      onHandleAddress = {onHandleAddress}
+      onHandleAddress={onHandleAddress}
     />
-    
   );
 };
-
-
