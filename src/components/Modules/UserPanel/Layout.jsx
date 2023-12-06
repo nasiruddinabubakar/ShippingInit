@@ -45,6 +45,21 @@ export const Layout = () => {
     }
     getOrders();
   }, []);
+
+  async function onclickdel(booking_id){
+    
+console.log("hello transit");
+    const res = await fetch(
+      `http://127.0.0.1:5000/api/orders/${booking_id}`,
+      { method:"DELETE",
+        headers: {
+          authorization: `${localStorage.getItem("user")}`,
+        },
+      }
+    );
+    const response = await res.json();
+  }
+ 
   return (
     <div className={`Main ${styles.main}`}>
       <HeaderLogout />
@@ -65,7 +80,7 @@ export const Layout = () => {
                 <Spinner />
               ) : (
                 orders.map((item) => {
-                  return item.delivered ? (
+                  return item.delivered && item.isdeleted!==1 ? (
                     <li onClick={() => handleListItemClick(item)}>
                       <h3>{item.consignee_name}</h3>
                       <div>
@@ -89,7 +104,7 @@ export const Layout = () => {
                 {selectedOrder && (
                   <div className="papa">
                     <OrderPopup item={selectedOrder} />
-                    <button className="delete-order">Delete Order</button>
+                    <button className="delete-order" onClick={()=>onclickdel(selectedOrder.booking_id)}>Delete Order</button>
                   </div>
                 )}
               </div>
@@ -102,7 +117,7 @@ export const Layout = () => {
                 <Spinner />
               ) : (
                 orders.map((item) => {
-                  return item.delivered ? (
+                  return item.delivered && item.isdeleted!==1 ? (
                     <></>
                   ) : (
                     <li onClick={() => handleListItemClick(item)}>
@@ -117,20 +132,7 @@ export const Layout = () => {
                 })
               )}
             </ul>
-            <Popup
-              className="popup"
-              open={isPopupOpen}
-              onClose={handlePopupClose}
-            >
-              <div>
-                {selectedOrder && (
-                  <div className="papa">
-                    <OrderPopup item={selectedOrder} />
-                    <button className="delete-order">Delete Order</button>
-                  </div>
-                )}
-              </div>
-            </Popup>
+            
           </div>
         </div>
       </div>
@@ -161,6 +163,7 @@ const OrderPopup = ({ item }) => {
           }
         );
         const response = await res.json();
+        console.log(response);
         setOrder(response.booking);
         setIsLoading(false);
       } catch (err) {

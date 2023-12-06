@@ -12,6 +12,7 @@ import { addDay } from "../../../../features/orders/orderSlice";
 import { toast,ToastContainer } from "react-toastify";
 const FeaturedShips = () => {
   const { pickup, dropoff } = useSelector((state) => state.route);
+  const {currWeight} = useSelector((state)=>state.order.orderWeight);
   const [shipArr, setShipArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   let shipsData = [];
@@ -25,6 +26,7 @@ const FeaturedShips = () => {
           {
             pickup,
             dropoff,
+            currWeight
           }
         );
         const shipsData = response.ships;

@@ -168,6 +168,8 @@ tr {
   background: transparent;
 }
 .delete-order{
+  /* position: absolute; */
+  z-index: 999;
   font-family: inherit;
   font-weight: 700;
   display: flex;

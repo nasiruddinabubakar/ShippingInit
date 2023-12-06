@@ -111,7 +111,7 @@ const RouteAndShipDetails = ({ imageData, name, price_per_tonne, days }) => {
   );
 };
 
-const OrderDetails = () => {
+const OrderDetails = ({mail,companyName}) => {
   const order = useSelector((state) => state.order);
   const keys = [
     "Consignee Name",
@@ -146,11 +146,11 @@ const OrderDetails = () => {
       <div className={styles.orderDetails}>
         <div className={styles.attributes}>
           <h3 className={styles.first_attr}>Company Name : </h3>{" "}
-          <h3 className={styles.second}>ForexShippers</h3>
+          <h3 className={styles.second}>{companyName}</h3>
         </div>
         <div className={styles.attributes}>
           <h3 className={styles.first_attr}>Company Mail : </h3>{" "}
-          <h3 className={styles.second}>alinaqi@gmail.com</h3>
+          <h3 className={styles.second}>{mail}</h3>
         </div>
       </div>
     </div>
