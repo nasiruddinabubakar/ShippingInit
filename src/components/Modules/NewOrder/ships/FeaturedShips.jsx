@@ -22,7 +22,7 @@ const FeaturedShips = () => {
       try {
         setIsLoading(true);
         const response = await postData(
-          "http://127.0.0.1:5000/api/ships/route",
+          "https://ship-backend-qmsc.onrender.com/api/ships/route",
           {
             pickup,
             dropoff,

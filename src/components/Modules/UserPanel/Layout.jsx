@@ -29,7 +29,7 @@ export const Layout = () => {
     async function getOrders() {
       try {
         setIsLoading(true);
-        const res = await fetch("http://127.0.0.1:5000/api/orders/history", {
+        const res = await fetch("https://ship-backend-qmsc.onrender.com/api/orders/history", {
           headers: {
             authorization: `${localStorage.getItem("user")}`,
           },

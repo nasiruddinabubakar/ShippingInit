@@ -30,7 +30,7 @@ export default () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "http://127.0.0.1:5000/api/ships/getships",
+          "https://ship-backend-qmsc.onrender.com/api/ships/getships",
           {
             cache: "no-store", // Disable caching
             mode: "cors", // Enable cross-origin resource sharing

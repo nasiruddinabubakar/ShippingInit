@@ -12,7 +12,7 @@ export const CheckoutBox = () => {
   async function ConfirmOrder() {
     console.log({ order, route });
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/orders/neworder", {
+      const res = await fetch("https://ship-backend-qmsc.onrender.com/api/orders/neworder", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
