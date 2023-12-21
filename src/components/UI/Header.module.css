@@ -81,3 +81,20 @@ h1{
         height:7rem;
     }
 }
+
+@media screen and (max-width:500px) {
+    .imgg{
+        display: none;
+    }
+    header{
+        justify-content: center;
+    }
+    nav{
+        
+        justify-content: center;
+    }
+    .headingg{
+        margin-right: 3rem;
+        margin-top: 1.7rem;
+    }
+}

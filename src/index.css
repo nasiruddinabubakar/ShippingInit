@@ -222,3 +222,10 @@ tr {
   }
 
 }
+@media screen and (max-width:500px){
+
+  .hooray{
+    width: 120%;
+    
+  }
+}

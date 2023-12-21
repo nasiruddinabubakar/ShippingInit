@@ -98,3 +98,11 @@
         height: 40rem;
     }
 }
+@media screen and (max-width:500px){
+
+    .box{
+        width: 90%;
+        margin: 0rem 2rem;
+    }
+    
+}

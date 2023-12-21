@@ -82,3 +82,10 @@
     padding-bottom: 2rem;
     border-bottom:1px solid rgb(80, 79, 79);
 }
+
+@media screen and (max-width:500px){
+
+    .innerGrid{
+        grid-auto-flow: column;
+    }
+}
