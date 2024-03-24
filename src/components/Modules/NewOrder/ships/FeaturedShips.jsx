@@ -1,8 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Header } from "../../../UI/Header";
 import styles from "./FeaturedShips.module.css";
-import OpacityDiv from "../../../framer/OpacityDiv";
-import { CheckoutBox } from "../../CheckOut/CheckoutBox";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { postData } from "../../../../utils/postData";
@@ -22,7 +21,7 @@ const FeaturedShips = () => {
       try {
         setIsLoading(true);
         const response = await postData(
-          "https://ship-backend-qmsc.onrender.com/api/ships/route",
+          "http://127.0.0.1:5000/api/ships/route",
           {
             pickup,
             dropoff,
@@ -64,7 +63,7 @@ const FeaturedShips = () => {
     }
 
     getShips();
-  }, []);
+  }, [pickup, dropoff,currWeight]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

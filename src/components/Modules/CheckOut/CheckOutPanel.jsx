@@ -17,7 +17,7 @@ export const CheckoutPanel = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "https://ship-backend-qmsc.onrender.com/api/ships/getships",
+          "http://127.0.0.1:5000/api/ships/getships",
           {
             cache: "no-store", // Disable caching
             mode: "cors", // Enable cross-origin resource sharing
@@ -88,7 +88,7 @@ const RouteAndShipDetails = ({ imageData, name, price_per_tonne, days }) => {
 
       <>
         <div>
-          <img src={imageData} />
+          <img src={imageData} alt="shipimg"/>
         </div>
 
         <div>

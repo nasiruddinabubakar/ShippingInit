@@ -10,12 +10,92 @@
     position: relative;
     justify-content: space-between;
     gap:2.4rem;
+    display: flex;  
+    
+}
+/* "primary-500": "#877EFF",
+"primary-600": "#5D5FEF",
+"secondary-500": "#FFB620",
+"off-white": "#D0DFFF",
+red: "#FF5A5A",
+"dark-1": "#14131a",
+"dark-2": "#09090A",
+"dark-3": "#101012",
+"dark-4": "#1F1F22",
+"light-1": "#FFFFFF",
+"light-2": "#EFEFEF",
+"light-3": "#7878A3",
+"light-4": "#5C5C7B",
+"btn-highlight": "#2bd576",
+"showcase-color":"",
+"text-info": "#1c1b23",
+"text-primary": "#8b8a91",
+"text-sexy": "#4f4f52", */
+.window{
+    border-radius: 1rem;
+    border: 1px solid var(--color-dark--2);
+    width: 80vw;
+    height: 75vh;
     display: flex;
+    background-color: var(--color-dark--2);
+}
+.navli{
+    border-radius: 1rem;
+    background-color:var(--color-dark--2);
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    border-right: 1px solid #343a40;
+    padding: 0rem 0rem;
+    /* border-radius: 1rem; */
+    cursor: pointer;
+    transition: 0.2s ease;
+    height: full;
+    width: 31rem;
+    align-items: center;
     
+}
+.navli ul{
    
-    
-    
-    
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    align-items: center;
+    /* justify-content: space-between; */
+    width: 100%;
+    height: 100%;
+}
+.orders{
+    padding: 1rem;
+    flex-direction: column;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.orders li{
+    border-radius: 1rem;
+    background-color: var(--color-dark--2);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 4rem;
+    border-bottom: 1px solid #343a40;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.orderWindow{
+    /* background-color: var(--color-dark--1); */
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 .heading{
     display: flex;
@@ -29,6 +109,7 @@
 }
 
 .heading h1{
+    /* :"#ffb545"; */
     display: inherit;
     gap: 0.5rem;
     align-items: center;
@@ -67,27 +148,23 @@
     background-color: var(--color-brand--2);
     color: black;
 }
-ul{
-    list-style: none;
-    /* overflow: scroll; */
-    padding: 0.8rem 0;
-}
+
 .list div, .list p {
     align-items: center;
     display: flex;
 }
-li{
-    grid-column-gap: 2.4rem; 
-    align-items: center;
+li{ 
+    color: var(--color-light--1);
+    font-family: inherit;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
      border-bottom: 1px solid #343a40;
-    /* border-bottom: 1px solid var); */
-    -webkit-column-gap: 2.4rem;
-    column-gap: 2.4rem;
-    display: grid;
-    font-size: 1.6rem;
-    /* grid-template-columns: 4rem 1fr; */
-    grid-template-rows: auto auto;
-    padding: 1.6rem 3.2rem;
+    font-size: 17px;
+    gap: 2rem;
+    padding: 2.5rem 3.8rem;
     position: relative;
     cursor: pointer;
     transition: 0.2s ease;
@@ -108,6 +185,27 @@ img{
     font-size: 1.8rem;
     font-size: 1.8rem;
 }
+.logout button{
+    font-family: inherit;
+    font-weight: 600;
+    display: flex;
+    align-items:center;
+    gap: 0.7rem;
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+    padding:0.9rem 8rem;
+    color: var(--color-brand--2);
+    background-color: var(--color-dark--2);
+    text-align: center;
+    border:1px solid var(--color-dark--2);
+    border-radius: 2rem;
+    transition: 0.32s ease;
+}
+ .logout button:hover{
+    transition: 0.32s ease;
+    background-color: var(--color-brand--2);
+    color: black;
+}
 /* Styling the scrollbar track (the area behind the thumb) */
 ::-webkit-scrollbar {
     width: 10px; /* Set the width of the scrollbar */
@@ -117,14 +215,14 @@ img{
   /* Styling the scrollbar thumb (the draggable part) */
   ::-webkit-scrollbar-thumb {
     border-radius: 0rem 2rem 2rem 0rem;
-    background: #7777 /* Set the color of the scrollbar thumb */
+    background: var(--color-brand--2) /* Set the color of the scrollbar thumb */
   }
   
   /* Styling the scrollbar track when the mouse hovers over it */
   ::-webkit-scrollbar-track {
     border-radius: 0rem 2rem 2rem 0rem;
-    border :1px solid rgb(61, 59, 59);
-    background: rgb(61, 60, 60);
+    border :1px solid #1F1F22;
+    background: #1F1F22;
   }
 
   @media screen and (max-width:500px){

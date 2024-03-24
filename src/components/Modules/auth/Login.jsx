@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RegisterData } from "./RegisterData";
-import { LoginData, LoginForm } from "./LoginData";
+import { LoginData } from "./LoginData";
 
 import { Header } from "../../UI/Header";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export const Login = () => {
       const authToken = localStorage.getItem("user");
       if (authToken) {
         const res = await fetch(
-          "https://ship-backend-qmsc.onrender.com/api/users/authorization",
+          "http://127.0.0.1:5000/api/users/authorization",
           {
             headers: {
               authorization: authToken,

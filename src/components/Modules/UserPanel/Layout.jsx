@@ -1,7 +1,7 @@
-import { Anchor, Check, Container, Sailboat, Ship } from "lucide-react";
+import { Anchor, ArrowRightLeft, Check,  Ship, Circle, User, LogOut } from "lucide-react";
 import styles from "./Layout.module.css";
-import { HeaderLogout } from "../../UI/HeaderLogout";
-import { Link } from "react-router-dom";
+import { Header } from "../../UI/Header";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Spinner from "../../UI/Spinner";
 import React from "react";
@@ -14,6 +14,13 @@ export const Layout = () => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const navigate = useNavigate();
+    function handleLogout(){
+
+        localStorage.clear();
+        navigate("/");
+
+    }
 
   const handleListItemClick = (order) => {
     setSelectedOrder(order);
@@ -29,7 +36,7 @@ export const Layout = () => {
     async function getOrders() {
       try {
         setIsLoading(true);
-        const res = await fetch("https://ship-backend-qmsc.onrender.com/api/orders/history", {
+        const res = await fetch("http://127.0.0.1:5000/api/orders/history", {
           headers: {
             authorization: `${localStorage.getItem("user")}`,
           },
@@ -57,19 +64,120 @@ console.log("hello transit");
         },
       }
     );
-    const response = await res.json();
+     await res.json();
   }
  
   return (
     <div className={`Main ${styles.main}`}>
-      <HeaderLogout />
-      <div className={styles.papa}>
-        <div className={styles.heading}>
+      <Header />
+      <div className={styles.window} >
+       <div className={styles.navli}>
+        <>
+       <ul>
+          <li><ArrowRightLeft size={24} color="#ffb545"/>Ongoing Orders </li>
+          <li> <Check strokeWidth={2.9} color="#00c46a"/>FullFilled Orders </li>
+          <li><User color="WHITE"/>Account Info</li>
+        </ul>
+        
+         <div style={{display:"flex",marginLeft:"0rem"}}className={styles.logout}>
+          <button onClick={handleLogout}>LogOut<LogOut /> </button>
+          </div>
+          </>
+        
+        
+        
+       </div>
+       <div className={styles.orderWindow}>
+        <ul className={styles.orders}>
+        {isLoading ? (
+                <Spinner />
+              ) : (
+                orders.map((item) => {
+                  return (
+                    <li onClick={() => handleListItemClick(item)}>
+                      <h4>{item.consignee_name}</h4>
+                      <div>
+                        <p style={{display:"flex",gap:"3rem"}}>
+                          {item.pickup}   --   {item.dropoff}
+                        </p>
+                      </div>
+                    </li>
+                  ) 
+                })
+              )}
+        </ul>
+       </div>
+      </div>
+      <div className={styles.btn_div}>
+        <Link to="/user/neworder">
+          <button onMouseOver={() => {}}>
+            Ship New Order <Ship size={20} />
+          </button>
+        </Link> */
+                </div>
+    </div>
+  );
+};
+
+const OrderPopup = ({ item }) => {
+  const [order, setOrder] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    async function getOrderDetails() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `http://127.0.0.1:5000/api/orders/${item.booking_id}`,
+          {
+            headers: {
+              authorization: `${localStorage.getItem("user")}`,
+            },
+          }
+        );
+        const response = await res.json();
+        console.log(response);
+        setOrder(response.booking);
+        setIsLoading(false);
+      } catch (err) {
+        toast.error(err.message, {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast_message",
+        });
+        setIsLoading(false);
+      }
+    }
+    getOrderDetails();
+  }, );
+
+  return (
+    <>
+      {" "}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <h3> Consignee Name : {item.consignee_name}</h3>
+          <p>
+            Route : {item.pickup} -- {item.dropoff}
+          </p>
+          <p>Weight : {order.weight_in_tonne} Tonnes</p>
+          <p>Ship : {order.name}</p>
+          <p>Company mail : {order.email}</p>
+          {/* Add other order details as needed */}
+        </>
+      )}
+    </>
+  );
+};
+
+
+
+ {/* <div className={styles.heading}>
           <h1>
             Delivered
             <Check strokeWidth={2.9} />
           </h1>
-          <h1>
+          <h1 style={{color:"#ffb545"}}>
             In Transit <Anchor color="#ffb545" />
           </h1>
         </div>
@@ -141,59 +249,4 @@ console.log("hello transit");
           <button onMouseOver={() => {}}>
             Ship New Order <Ship size={20} />
           </button>
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-const OrderPopup = ({ item }) => {
-  const [order, setOrder] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    async function getOrderDetails() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(
-          `http://127.0.0.1:5000/api/orders/${item.booking_id}`,
-          {
-            headers: {
-              authorization: `${localStorage.getItem("user")}`,
-            },
-          }
-        );
-        const response = await res.json();
-        console.log(response);
-        setOrder(response.booking);
-        setIsLoading(false);
-      } catch (err) {
-        toast.error(err.message, {
-          position: toast.POSITION.TOP_RIGHT,
-          className: "toast_message",
-        });
-        setIsLoading(false);
-      }
-    }
-    getOrderDetails();
-  }, []);
-
-  return (
-    <>
-      {" "}
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <>
-          <h3> Consignee Name : {item.consignee_name}</h3>
-          <p>
-            Route : {item.pickup} -- {item.dropoff}
-          </p>
-          <p>Weight : {order.weight_in_tonne} Tonnes</p>
-          <p>Ship : {order.name}</p>
-          <p>Company mail : {order.email}</p>
-          {/* Add other order details as needed */}
-        </>
-      )}
-    </>
-  );
-};
+        </Link> */}
