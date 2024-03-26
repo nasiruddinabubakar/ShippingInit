@@ -33,11 +33,12 @@ red: "#FF5A5A",
 "text-sexy": "#4f4f52", */
 .window{
     border-radius: 1rem;
-    border: 1px solid var(--color-dark--2);
-    width: 80vw;
+    /* border: 1px solid var(--color-dark--2); */
+    width: 70vw;
     height: 75vh;
     display: flex;
-    background-color: var(--color-dark--2);
+    background-color: var(--color-dark--1);
+    gap: 1rem;
 }
 .navli{
     border-radius: 1rem;
@@ -66,7 +67,7 @@ red: "#FF5A5A",
     height: 100%;
 }
 .orders{
-    padding: 1rem;
+    padding: 0rem 1rem 1rem 1rem;
     flex-direction: column;
     display: flex;
     gap: 2rem;
@@ -202,7 +203,9 @@ img{
     transition: 0.32s ease;
     cursor: pointer;
 }
-
+.route{
+    font-size: 1.5rem;
+}
 /* Styling the scrollbar track (the area behind the thumb) */
 ::-webkit-scrollbar {
     width: 10px; /* Set the width of the scrollbar */

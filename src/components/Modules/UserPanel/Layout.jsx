@@ -14,7 +14,7 @@ export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [singleOrder, setSingleOrder] = useState(null);
   const [transitOrDelivered, setTransitOrDelivered] = useState(false);
- 
+
   const navigate = useNavigate();
   function handleLogout() {
     localStorage.clear();
@@ -97,30 +97,56 @@ export const Layout = () => {
           </>
         </div>
         <div className={styles.orderWindow}>
-          {!singleOrder ?(
-            console.log(orders),
-          <ul className={styles.orders}>
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              orders.map((item) => {
-                return (!transitOrDelivered && !item.delivered) ||
-                  (transitOrDelivered && item.delivered) ? (
-                  <li onClick={() => setSingleOrder((nullval) => item)}>
-                    <h4>{item.consignee_name}</h4>
-                    <div>
-                      <p style={{ display: 'flex', gap: '3rem' }}>
-                        {item.pickup} -- {item.dropoff}
-                      </p>
-                    </div>
-                  </li>
+          {!singleOrder ? (
+            (console.log(orders),
+            (
+              <ul className={styles.orders}>
+                {isLoading ? (
+                  <Spinner />
                 ) : (
-                 <></>
-                );
-              })
-            )}
-          </ul>
-          ):(<SingleOrder order={singleOrder} setSingleOrder={setSingleOrder}/> ) }
+                  orders.map((item) => {
+                    return (!transitOrDelivered && !item.delivered) ||
+                      (transitOrDelivered && item.delivered) ? (
+                      <li onClick={() => setSingleOrder((nullval) => item)}>
+                        <h4
+                          style={{
+                            display: 'flex',
+                            width: '20rem ',
+                            fontSize: '1.8rem',
+                            // border: '1px solid red',
+                          }}
+                        >
+                          {item.consignee_name}
+                        </h4>
+                        <div style={{ display: 'flex', width: '23rem ', justifyContent:'center' }}>
+                          <p
+                            style={{
+                              display: 'flex',
+                              gap: '1.5rem',
+                              font: '20px',
+                              alignItems: 'center',
+                            }}
+                            className={styles.route}
+                          >
+                            {item.pickup} <img src='/back.png' style={{width:'30px',height:'30px'}}/>{item.dropoff}
+                          </p>
+                        </div>
+                        <div style={{ display: 'flex',width:'10rem' }}>
+                          <p className={styles.route}>
+                            {new Date(item.booking_date).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </li>
+                    ) : (
+                      <></>
+                    );
+                  })
+                )}
+              </ul>
+            ))
+          ) : (
+            <SingleOrder order={singleOrder} setSingleOrder={setSingleOrder} />
+          )}
         </div>
       </div>
       <div className={styles.btn_div}>

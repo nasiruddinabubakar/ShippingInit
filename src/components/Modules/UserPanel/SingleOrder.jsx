@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './SingleOrder.module.css';
 import { toast } from 'react-toastify';
 import { MessageCircle, MoveLeft, Send, SendHorizonal } from 'lucide-react';
+import OpacityDiv from '../../framer/OpacityDiv';
 
 export const SingleOrder = ({ order, setSingleOrder }) => {
   const [orderSingle, setOrder] = useState({});
@@ -47,6 +48,7 @@ export const SingleOrder = ({ order, setSingleOrder }) => {
   }, []);
 
   return (
+    <OpacityDiv>
     <div className={styles.order}>
       <div className={styles.backArr}>
         <button onClick={() => setSingleOrder((item) => null)}>
@@ -117,5 +119,6 @@ export const SingleOrder = ({ order, setSingleOrder }) => {
             </p>
         </div> */}
     </div>
+    </OpacityDiv>
   );
 };
