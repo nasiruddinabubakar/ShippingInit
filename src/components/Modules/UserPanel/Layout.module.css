@@ -48,7 +48,7 @@ red: "#FF5A5A",
     border-right: 1px solid #343a40;
     padding: 0rem 0rem;
     /* border-radius: 1rem; */
-    cursor: pointer;
+  
     transition: 0.2s ease;
     height: full;
     width: 31rem;
@@ -200,12 +200,9 @@ img{
     border:1px solid var(--color-dark--2);
     border-radius: 2rem;
     transition: 0.32s ease;
+    cursor: pointer;
 }
- .logout button:hover{
-    transition: 0.32s ease;
-    background-color: var(--color-brand--2);
-    color: black;
-}
+
 /* Styling the scrollbar track (the area behind the thumb) */
 ::-webkit-scrollbar {
     width: 10px; /* Set the width of the scrollbar */
