@@ -79,7 +79,7 @@ export function LoginData() {
       setIsLoading((isloading) => true);
       setTimeout(() => {
         setIsLoading((isloading) => false);
-        navigate("/user/dashboard");
+        navigate("/");
       }, 100);
     }
   }

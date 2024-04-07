@@ -178,6 +178,10 @@ li:hover{
 .list img {
    
 }
+a {
+    text-decoration: none;
+    width: 100%;
+}
 img{
     overflow-clip-margin: content-box;
     overflow: clip;

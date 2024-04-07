@@ -3,8 +3,10 @@ import styles from './SingleOrder.module.css';
 import { toast } from 'react-toastify';
 import { MessageCircle, MoveLeft, Send, SendHorizonal } from 'lucide-react';
 import OpacityDiv from '../../framer/OpacityDiv';
-
-export const SingleOrder = ({ order, setSingleOrder }) => {
+  import {Link, useParams} from 'react-router-dom';
+export const SingleOrder = () => {
+  const params = useParams();
+  const id = params.id;
   const [orderSingle, setOrder] = useState({});
   const[ImageData, setImageData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +15,7 @@ export const SingleOrder = ({ order, setSingleOrder }) => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `http://127.0.0.1:5000/api/orders/${order.booking_id}`,
+          `http://127.0.0.1:5000/api/orders/${id}`,
           {
             headers: {
               authorization: `${localStorage.getItem('user')}`,
@@ -51,9 +53,11 @@ export const SingleOrder = ({ order, setSingleOrder }) => {
     <OpacityDiv>
     <div className={styles.order}>
       <div className={styles.backArr}>
-        <button onClick={() => setSingleOrder((item) => null)}>
+        <Link to='/'>
+        <button >
           <MoveLeft />
         </button>
+        </Link>
       </div>
       <div className={styles.details}>
         <div className={styles.imageDiv}>
@@ -66,7 +70,7 @@ export const SingleOrder = ({ order, setSingleOrder }) => {
             Order Details
           </h3>
           <h4 style={{ marginTop: '3rem' }}>
-            Consignee : {order.consignee_name}
+            Consignee : {orderSingle.consignee_name}
           </h4>
           <h4 style={{ marginTop: '1.85rem' }}>
             Ship Name : {orderSingle.shipName}
@@ -78,10 +82,10 @@ export const SingleOrder = ({ order, setSingleOrder }) => {
             Weight In Ton: {orderSingle.weight_in_tonne}
           </h4>
           <h4 style={{ marginTop: '1.85rem' }}>
-            Pickup Country : {order.pickup}
+            Pickup Country : {orderSingle.pickup}
           </h4>
           <h4 style={{ marginTop: '1.85rem' }}>
-            Dropoff Country : {order.dropoff}
+            Dropoff Country : {orderSingle.dropoff}
           </h4>
           {/* <h4>Ship Name : {orderSingle.name}</h4> */}
         </div>
