@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './SingleOrder.module.css';
 import { toast } from 'react-toastify';
-import { MessageCircle, MoveLeft, Send, SendHorizonal } from 'lucide-react';
+import { MessageCircle, MoveLeft,  } from 'lucide-react';
 import OpacityDiv from '../../framer/OpacityDiv';
   import {Link, useParams} from 'react-router-dom';
 export const SingleOrder = () => {
@@ -47,7 +47,7 @@ export const SingleOrder = () => {
       }
     }
     getOrderDetails();
-  }, []);
+  },[] );
 
   return (
     <OpacityDiv>
@@ -65,26 +65,26 @@ export const SingleOrder = () => {
         </div>
         <div className={styles.detailDiv}>
           <h3
-            style={{ marginTop: '1rem', fontSize: '2.3rem', color: '#00c46a' }}
+            
           >
             Order Details
           </h3>
-          <h4 style={{ marginTop: '3rem' }}>
-            Consignee : {orderSingle.consignee_name}
+          <h4 >
+            Consignee : {orderSingle?.consignee_name}
           </h4>
-          <h4 style={{ marginTop: '1.85rem' }}>
+          <h4 >
             Ship Name : {orderSingle.shipName}
           </h4>
-          <h4 style={{ marginTop: '1.85rem' }}>
+          <h4 >
             Company Name : {orderSingle.name}
           </h4>
-          <h4 style={{ marginTop: '1.85rem' }}>
+          <h4 >
             Weight In Ton: {orderSingle.weight_in_tonne}
           </h4>
-          <h4 style={{ marginTop: '1.85rem' }}>
+          <h4 >
             Pickup Country : {orderSingle.pickup}
           </h4>
-          <h4 style={{ marginTop: '1.85rem' }}>
+          <h4 >
             Dropoff Country : {orderSingle.dropoff}
           </h4>
           {/* <h4>Ship Name : {orderSingle.name}</h4> */}

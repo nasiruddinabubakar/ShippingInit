@@ -11,6 +11,7 @@ import SpinnerFullPage from "./components/UI/SpinnerFullPage";
 import { CurrentOrders } from "./components/Modules/UserPanel/CurrentOrders";
 import { PreviousOrders } from "./components/Modules/UserPanel/PreviousOrders";
 import { SingleOrder } from "./components/Modules/UserPanel/SingleOrder";
+import { Inbox } from "./components/Modules/Messages/Inbox";
 
 
  
@@ -63,7 +64,7 @@ function App() {
         <Route path="/:id" index element={<SingleOrder/>}/>
         <Route path="/previous-orders" element={<PreviousOrders/>}/>
         <Route path="/user/dashboard/account-info" element={<Layout/>}/>
-        <Route path="/user/dashboard/inbox" element={<Layout/>}/>
+        <Route path="/user/dashboard/inbox" element={<Inbox/>}/>
 
       </Route>
 

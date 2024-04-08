@@ -15,7 +15,7 @@ export async function getOrders() {
 
 }
 
-async function onclickdel(booking_id) {
+async function deleteOrder(booking_id) {
   console.log('hello transit');
   const res = await fetch(`http://127.0.0.1:5000/api/orders/${booking_id}`, {
     method: 'DELETE',
@@ -23,5 +23,5 @@ async function onclickdel(booking_id) {
       authorization: `${localStorage.getItem('user')}`,
     },
   });
-  await res.json();
+  return await res.json();
 }

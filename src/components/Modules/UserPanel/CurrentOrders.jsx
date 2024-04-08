@@ -9,14 +9,15 @@ export const CurrentOrders = () => {
    
   
     const {data:orders,isPending:isLoading} = useOrders();
-   
+   try{
   return (
+    
     <div className={styles.orderWindow}>
       <ul className={styles.orders}>
         {isLoading ? (
           <Spinner />
         ) : (
-          orders.map((item) => {
+          orders?.map((item) => {
             return (  !item.delivered) 
             ? (
               <Link to={`/${item.booking_id}`}>
@@ -68,6 +69,9 @@ export const CurrentOrders = () => {
           })
         )}
       </ul>
-    </div>
-  );
+    </div>);
+}catch(err){
+  console.error(err);
+  // return <div>Something went wrong</div>;
+}
 };
