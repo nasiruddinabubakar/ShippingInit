@@ -8,6 +8,7 @@ import React from 'react';
 
 import { toast } from 'react-toastify';
 import { SingleOrder } from './SingleOrder';
+import OpacityDiv from '../../framer/OpacityDiv';
 // import "reactjs-popup/dist/index.css";
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,12 +31,12 @@ export const Layout = () => {
           console.log(response);
           setIsLoading(false);
         if (response.status === "failed") {
-          navigate("/login/");
+          navigate("/login");
         } else {
           
         }
       } else {
-        navigate("/login/");
+        navigate("/login");
       }
     }
     verifyToken();
@@ -56,24 +57,27 @@ export const Layout = () => {
   return (
     <div className={`Main ${styles.main}`}>
       <Header />
+      <OpacityDiv>
       <div className={styles.window}>
         <div className={styles.navli}>
           <>
             <ul>
               <Link to="/">
               <li  value={1}>
-                <ArrowRightLeft size={24} color="#ffb545" />
-                Ongoing Orders{' '}
-              </li>
-              </Link>
-              <Link to="/previous-orders">
-              <li  value={2}>
                 {' '}
                 <Check strokeWidth={2.9} color="#00c46a" />
                 FullFilled Orders{' '}
               </li>
               </Link>
-              <Link to="/inbox">
+              <Link to="/current-orders">
+              <li  value={2}>
+                <ArrowRightLeft size={24} color="#ffb545" />
+                Ongoing Orders{' '}
+              </li>
+             
+             
+              </Link>
+              <Link to="/user/inbox">
               <li >
               <Mail color="#1ee6be" />
                 My Inbox 
@@ -100,6 +104,7 @@ export const Layout = () => {
         </div>
         <Outlet />
       </div>
+      </OpacityDiv>
       <div className={styles.btn_div}>
         <Link to="/user/neworder">
           <button onMouseOver={() => {}}>
@@ -108,6 +113,7 @@ export const Layout = () => {
         </Link>{' '}
         */
       </div>
+     
     </div>
   );
 };
