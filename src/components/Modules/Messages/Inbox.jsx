@@ -31,7 +31,7 @@ export const Inbox = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/user/inbox/1">
+                <Link to="/user/inbox/msg">
                   <div className={styles.chat}>
                     <div className={styles.chatAvatar}><h4>FT</h4></div>
                     <div className={styles.chatDetails}>
@@ -42,7 +42,7 @@ export const Inbox = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/user/inbox/1">
+                <Link to="/user/inbox/msg">
                   <div className={styles.chat}>
                     <div className={styles.chatAvatar}><h4>FT</h4></div>
                     <div className={styles.chatDetails}>
@@ -53,7 +53,7 @@ export const Inbox = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/user/inbox/1">
+                <Link to="/user/inbox/msg">
                   <div className={styles.chat}>
                     <div className={styles.chatAvatar}><h4>FT</h4></div>
                     <div className={styles.chatDetails}>

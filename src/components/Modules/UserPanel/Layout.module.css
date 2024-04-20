@@ -52,7 +52,7 @@ red: "#FF5A5A",
   
     transition: 0.2s ease;
     height: full;
-    width: 32rem;
+    width: 37rem;
     align-items: center;
     
 }
@@ -220,14 +220,14 @@ img{
   /* Styling the scrollbar thumb (the draggable part) */
   ::-webkit-scrollbar-thumb {
     border-radius: 0rem 2rem 2rem 0rem;
-    background: var(--color-brand--2) /* Set the color of the scrollbar thumb */
+    background: transparent /* Set the color of the scrollbar thumb */
   }
   
   /* Styling the scrollbar track when the mouse hovers over it */
   ::-webkit-scrollbar-track {
     border-radius: 0rem 2rem 2rem 0rem;
-    border :1px solid #1F1F22;
-    background: #1F1F22;
+    /* border :1px solid #1F1F22; */
+    background: transparent
   }
 
   @media screen and (max-width:500px){
