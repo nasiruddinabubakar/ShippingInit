@@ -3,6 +3,7 @@ import { Header } from '../../UI/Header';
 import styles from './Inbox.module.css';
 import { Link, Outlet } from 'react-router-dom';
 import OpacityDiv from '../../framer/OpacityDiv';
+import { Padding } from '@mui/icons-material';
 export const Inbox = () => {
   return (
     <div className={`Main ${styles.main} `}>
@@ -24,7 +25,10 @@ export const Inbox = () => {
                   <div className={styles.chat}>
                     <div className={styles.chatAvatar}><h4>FT</h4></div>
                     <div className={styles.chatDetails}>
+                      <div className={styles.unreadDiv}>
                     <h4>Forex Traders</h4>
+                      <h4 id={styles.number}>3</h4>
+                      </div>
                     <p>Hi, thanks for contacting us, we will reach out shortly</p>
                     </div>
                   </div>

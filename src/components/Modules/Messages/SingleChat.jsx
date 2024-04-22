@@ -1,9 +1,9 @@
-import { Mail, Send, SendHorizonal, SendHorizonalIcon } from 'lucide-react';
+import { Mail, } from 'lucide-react';
 import Opacity from '../../framer/Opacity';
 import OpacityDiv from '../../framer/OpacityDiv';
 import styles from './SingleChat.module.css';
 import { useEffect, useRef } from 'react';
-
+import SendIcon from '@mui/icons-material/Send';
 export const SingleChatLogo = () => {
  
   return (
@@ -93,7 +93,7 @@ export const SingleChat = () => {
                 <h4>NA</h4>
               </div>
               <div className={styles.userMessageContent}>
-                <p>I would literally beat the shit out of you</p>
+                <p>I would literally beat the shit out of you 😂😂😂</p>
               </div>
               </div>
               <div className={styles.message}>
@@ -168,7 +168,7 @@ export const SingleChat = () => {
               placeholder="Type a message"
               className={styles.input}
             />
-            <button className={styles.sendButton}><SendHorizonal/></button>
+            <button className={styles.sendButton}><SendIcon sx={{size:22}}/></button>
 
           </div>
         </div>
