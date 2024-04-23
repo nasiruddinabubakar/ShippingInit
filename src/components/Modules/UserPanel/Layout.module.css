@@ -53,6 +53,8 @@ red: "#FF5A5A",
     transition: 0.2s ease;
     height: full;
     width: 37rem;
+    max-width: 30rem;
+    min-width: 30rem;
     align-items: center;
     
 }

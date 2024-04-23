@@ -16,7 +16,7 @@ export const PreviousOrders = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          orders.map((item) => {
+          orders?.map((item) => {
             return (  item.delivered) 
             ? (
               <Link to={`/${item.booking_id}`}>

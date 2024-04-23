@@ -1,31 +1,29 @@
 // import AppNav from "../components/AppNav";
 // import SelectRoutes from "./SelectRoutes";
-import { useEffect, useState } from "react";
-import Map from "../Map/Map";
-import styles from "./RoutesLayout.module.css";
-import { SelectRoutes } from "./SelectRoutes";
-import { useDispatch } from "react-redux";
-import { addDropoff, addPickup } from "../../../../features/orders/orderSlice";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from 'react';
+import Map from '../Map/Map';
+import styles from './RoutesLayout.module.css';
+import { SelectRoutes } from './SelectRoutes';
+import { useDispatch } from 'react-redux';
+import { addDropoff, addPickup } from '../../../../features/orders/orderSlice';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { getAllCountries } from '../../../../libs/react-query/api';
+import { useQuery } from '@tanstack/react-query';
+import { useCountries } from '../../../../libs/react-query/queriesAndMutations';
 export default function RoutesLayout() {
-  const apiKey = "d7ed84d83e949baab350dff74ab8e51d";
+  const { data: Countries } = useCountries();
+   console.log(Countries);
+
+  const apiKey = 'd7ed84d83e949baab350dff74ab8e51d';
   const [fetchCoordinates, setFetchCoordinates] = useState(null);
-  const [dropOff, setDropOff] = useState(null);
-  const [pickUp, setPickUp] = useState(null);
+  const [dropOff, setDropOff] = useState('Russia');
+  const [pickUp, setPickUp] = useState('China');
   const [pickupOrDropOff, setPickupOrDropOff] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let routesArr = [];
   function handlePickupOrDropOff() {
-    if (fetchCoordinates.length < 4) {
-      toast.error("Please Enter Country Name", {
-        position: toast.POSITION.TOP_RIGHT,
-        className: "toast_message",
-      });
-
-      return;
-    }
     dispatch(addDropoff({ dropOff: fetchCoordinates }));
     setPickupOrDropOff(true);
   }
@@ -51,23 +49,23 @@ export default function RoutesLayout() {
         const [data] = await req.json();
         const Location = data;
 
-        if (typeof Location === "undefined") {
+        if (typeof Location === 'undefined') {
           return;
         }
         if (!pickupOrDropOff) {
           routesArr.push(fetchCoordinates);
-          console.log("dropOFF", fetchCoordinates);
+          console.log('dropOFF', fetchCoordinates);
           setDropOff(Location);
 
           return;
         } else {
           setPickUp(Location);
-          
+
           dispatch(addPickup({ pickUp: fetchCoordinates }));
           console.log(routesArr);
         }
       } catch (error) {
-        console.error("An error occurred:", error);
+        console.error('An error occurred:', error);
       }
     }
 
@@ -75,15 +73,7 @@ export default function RoutesLayout() {
   }, [fetchCoordinates]);
 
   const dispatchPickUp = () => {
-    if (fetchCoordinates.length < 4) {
-      toast.error("Please Enter Country Name", {
-        position: toast.POSITION.TOP_RIGHT,
-        className: "toast_message",
-      });
-
-      return;
-    }
-    navigate("/neworder/routes/ships");
+    navigate('/neworder/routes/ships');
   };
 
   return (
@@ -95,6 +85,7 @@ export default function RoutesLayout() {
         pickUpOrDropOff={pickupOrDropOff}
         handlePickupOrDropOff={handlePickupOrDropOff}
         dispatchPickUp={dispatchPickUp}
+        Countries={Countries?.countries}
       />
       {!pickupOrDropOff ? (
         dropOff ? (

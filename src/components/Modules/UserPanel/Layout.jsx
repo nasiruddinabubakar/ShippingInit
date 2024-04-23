@@ -9,101 +9,99 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { SingleOrder } from './SingleOrder';
 import OpacityDiv from '../../framer/OpacityDiv';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from '../../../libs/react-query/queryKeys';
 // import "reactjs-popup/dist/index.css";
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [login, setLogin] = useState(true);
   useEffect(() => {
     async function verifyToken() {
-      const authToken = localStorage.getItem("user");
+      const authToken = localStorage.getItem('user');
       if (authToken) {
         setIsLoading(true);
         const res = await fetch(
-          "http://127.0.0.1:5000/api/users/authorization",
+          'http://127.0.0.1:5000/api/users/authorization',
           {
             headers: {
               authorization: authToken,
-             
             },
           }
         );
         const response = await res.json();
-          console.log(response);
-          setIsLoading(false);
-        if (response.status === "failed") {
-          navigate("/login");
+        console.log(response);
+        setIsLoading(false);
+        if (response.status === 'failed') {
+          navigate('/login');
         } else {
-          
         }
       } else {
-        navigate("/login");
+        navigate('/login');
       }
     }
     verifyToken();
-  }, [login])
-
+  }, [login]);
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   function handleLogout(e) {
     e.preventDefault();
     console.log('logout');
     localStorage.clear();
+    
+    queryClient.clear()
     setLogin(false);
+    
     navigate('/');
   }
-
-
- 
 
   return (
     <div className={`Main ${styles.main}`}>
       <Header />
       <OpacityDiv>
-      <div className={styles.window}>
-        <div className={styles.navli}>
-          <>
-            <ul>
-              <Link to="/">
-              <li  value={1}>
-                {' '}
-                <Check strokeWidth={2.9} color="#00c46a" />
-                FullFilled Orders{' '}
-              </li>
-              </Link>
-              <Link to="/current-orders">
-              <li  value={2}>
-                <ArrowRightLeft size={24} color="#ffb545" />
-                Ongoing Orders{' '}
-              </li>
-             
-             
-              </Link>
-              <Link to="/user/inbox">
-              <li >
-              <Mail color="#1ee6be" />
-                My Inbox 
-              </li>
-              </Link>
-              <Link to="/account">
-              <li >
-                <User color="WHITE" />
-                Account Info
-              </li>
-              </Link>
-            </ul>
+        <div className={styles.window}>
+          <div className={styles.navli}>
+            <>
+              <ul>
+                <Link to="/">
+                  <li value={1}>
+                    {' '}
+                    <Check strokeWidth={2.9} color="#00c46a" />
+                    FullFilled Orders{' '}
+                  </li>
+                </Link>
+                <Link to="/current-orders">
+                  <li value={2}>
+                    <ArrowRightLeft size={24} color="#ffb545" />
+                    Ongoing Orders{' '}
+                  </li>
+                </Link>
+                <Link to="/user/inbox">
+                  <li>
+                    <Mail color="#1ee6be" />
+                    My Inbox
+                  </li>
+                </Link>
+                <Link to="/account-info">
+                  <li>
+                    <User color="WHITE" />
+                    Account Info
+                  </li>
+                </Link>
+              </ul>
 
-            <div
-              style={{ display: 'flex', marginLeft: '0rem' }}
-              className={styles.logout}
-            >
-              <button onClick={handleLogout}>
-                LogOut
-                <LogOut />{' '}
-              </button>
-            </div>
-          </>
+              <div
+                style={{ display: 'flex', marginLeft: '0rem' }}
+                className={styles.logout}
+              >
+                <button onClick={handleLogout}>
+                  LogOut
+                  <LogOut />{' '}
+                </button>
+              </div>
+            </>
+          </div>
+          <Outlet />
         </div>
-        <Outlet />
-      </div>
       </OpacityDiv>
       <div className={styles.btn_div}>
         <Link to="/user/neworder">
@@ -113,8 +111,6 @@ export const Layout = () => {
         </Link>{' '}
         */
       </div>
-     
     </div>
   );
 };
-

@@ -28,6 +28,32 @@
     font-size: 1.2rem;
     color: var(--color-light--1);
   }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.dropdown  select{
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-light--3);
+    transition: all 0.2s;
+  }
+  select option {
+    background-color: #fff;
+    color: #333;
+  }
+  select:not(:-internal-list-box) {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+
+
  
   @media screen and (max-width:500px) {
     

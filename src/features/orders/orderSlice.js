@@ -11,8 +11,8 @@ const initialState = {
   }, // String
   route: {
     shipId: "", // Stringw
-    pickup: "", // String
-    dropoff: "", // String
+    pickup: "China", // String
+    dropoff: "Russia", // String
   },
   days:0,
   price:0

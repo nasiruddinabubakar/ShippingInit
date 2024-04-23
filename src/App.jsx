@@ -23,6 +23,7 @@ import { PreviousOrders } from './components/Modules/UserPanel/PreviousOrders';
 import { SingleOrder } from './components/Modules/UserPanel/SingleOrder';
 import { Inbox } from './components/Modules/Messages/Inbox';
 import { SingleChat, SingleChatLogo } from './components/Modules/Messages/SingleChat';
+import Account from './components/Modules/UserPanel/Account';
 
 const router = createBrowserRouter([
   {
@@ -69,7 +70,7 @@ function App() {
         <Route path="" index element={<PreviousOrders />} />
         <Route path="/:id" index element={<SingleOrder />} />
         <Route path="/current-orders" element={<CurrentOrders />} />
-        <Route path="/account-info" element={<Layout />} />
+        <Route path="/account-info" element={<Account />} />
       </Route>
       <Route path="/user/inbox" element={<Inbox />}>
         <Route path="/user/inbox/" index element={<SingleChatLogo />} />

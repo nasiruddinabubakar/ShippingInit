@@ -1,43 +1,47 @@
-import { useSelector } from "react-redux";
-import styles from "./CheckoutBox.module.css";
+import { useSelector } from 'react-redux';
+import styles from './CheckoutBox.module.css';
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import { QUERY_KEYS } from '../../../libs/react-query/queryKeys';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const CheckoutBox = () => {
   const order = useSelector((state) => state.order);
   const route = useSelector((state) => state.route);
   const price = useSelector((State) => State.price);
   const days = useSelector((State) => State.days);
-  const authToken = localStorage.getItem("user");
+  const authToken = localStorage.getItem('user');
+  const queryClient = useQueryClient();
   async function ConfirmOrder() {
     console.log({ order, route });
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/orders/neworder", {
-        method: "POST",
+      const res = await fetch('http://127.0.0.1:5000/api/orders/neworder', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `${authToken}`,
         },
         body: JSON.stringify({ order, route, days, price }),
       });
       const response = await res.json();
-      if (response.status === "failed") {
+      if (response.status === 'failed') {
         toast.error(response.message, {
           position: toast.POSITION.TOP_RIGHT,
-          className: "toast_message",
+          className: 'toast_message',
         });
       }
-      if (response.status === "success") {
-        toast.success("Order Confirmed", {
+      if (response.status === 'success') {
+        queryClient.invalidateQueries([QUERY_KEYS.ORDERS])
+        toast.success('Order Confirmed', {
           position: toast.POSITION.TOP_RIGHT,
-          className: "toast_message",
+          className: 'toast_message',
         });
       }
     } catch (error) {
       if (error) {
         toast.error(error.message, {
           position: toast.POSITION.TOP_RIGHT,
-          className: "toast_message",
+          className: 'toast_message',
         });
       }
     }
@@ -50,7 +54,7 @@ export const CheckoutBox = () => {
         <div className={styles.checkout_summary}>
           <div className={styles.checkout_summary_label}>
             <div className={styles.coupon}>
-              <input type="text" placeholder="Enter Voucher Here" />{" "}
+              <input type="text" placeholder="Enter Voucher Here" />{' '}
               <button>Apply</button>
             </div>
           </div>

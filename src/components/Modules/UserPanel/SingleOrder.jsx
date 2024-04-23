@@ -105,8 +105,8 @@ export const SingleOrder = () => {
               Company Name : {orderSingle.name}
             </h4>
             <h4>Company Email : {orderSingle.email}</h4>
-            <h4>Company Phone : {orderSingle.phone}</h4>
-            <h4>Company Address : {orderSingle.address}</h4>
+            <h4>Company Phone : 0{orderSingle.phone_number}</h4>
+            <h4>Company Country : {orderSingle.country}</h4>
           </div>
 
           <div className={styles.btnDiv}>
