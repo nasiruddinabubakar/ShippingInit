@@ -10,8 +10,8 @@ export const CheckoutPanel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [imageData, setImageData] = useState([]);
   const [shipDetails, setShipDetails] = useState({});
-  const days = useSelector((state) => state.days);
-  const id = useSelector((state) => state.route.shipId);
+  const days = useSelector((state) => state.order.days);
+  const id = useSelector((state) => state.order.route.shipId);
   useEffect(() => {
     async function getShips() {
       setIsLoading(true);

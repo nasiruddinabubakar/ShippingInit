@@ -6,10 +6,10 @@ import { QUERY_KEYS } from '../../../libs/react-query/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const CheckoutBox = () => {
-  const order = useSelector((state) => state.order);
-  const route = useSelector((state) => state.route);
-  const price = useSelector((State) => State.price);
-  const days = useSelector((State) => State.days);
+  const order = useSelector((state) => state.order.order);
+  const route = useSelector((state) => state.order.route);
+  const price = useSelector((State) => State.order.price);
+  const days = useSelector((State) => State.order.days);
   const authToken = localStorage.getItem('user');
   const queryClient = useQueryClient();
   async function ConfirmOrder() {

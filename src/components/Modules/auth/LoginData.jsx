@@ -7,6 +7,8 @@ import TopDown from "../../framer/TopDown";
 import { toast, ToastContainer } from "react-toastify";
 import SpinnerFullPage from "../../UI/SpinnerFullPage";
 import { postData } from "../../../utils/postData";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../features/user/userSlice";
 
 
 export function LoginData() {
@@ -14,6 +16,8 @@ export function LoginData() {
   const [password, setPassword] = useState("");
   const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   function onhandleEmail(e) {
     setMail(e.target.value);
   }
@@ -55,6 +59,7 @@ export function LoginData() {
       });
       setIsLoading((isloading) => false);
       console.log(response);
+      dispatch(addUser(response.user?.user_id));
       if (response.status === "success") {
         localStorage.setItem("user", response.auth);
         moveToNext();

@@ -42,6 +42,7 @@ export const orderSlice = createSlice({
   },
 });
 
+
 export const { addOrder, addPickup, addDropoff, addShip,addDay } = orderSlice.actions;
 
 export default orderSlice.reducer;

@@ -84,7 +84,7 @@
 }
 #number{
     font-size: 14px;
-    color: var(--color-brand--2);
+    /* color: var(--color-brand--2); */
     border-radius: 50%;
     /* background-color: green; */
 }

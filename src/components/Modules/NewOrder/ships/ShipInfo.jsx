@@ -57,10 +57,10 @@ export default () => {
   const navigate = useNavigate();
   const dispacth = useDispatch();
 
-  const days = useSelector((state) => state.days);
-  const weight = useSelector((state) => state.order.orderWeight);
+  const days = useSelector((state) => state.order.days);
+  const weight = useSelector((state) => state.order.order.orderWeight);
   const price = Math.round(shipDetails.price_per_tonne * weight * (0.2 * days));
-  const { pickup, dropoff } = useSelector((State) => State.route);
+  const { pickup, dropoff } = useSelector((State) => State.order.route);
   function onConfirmShip() {
     console.log(shipDetails);
 

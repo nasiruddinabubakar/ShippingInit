@@ -10,8 +10,8 @@ import SpinnerFullPage from "../../../UI/SpinnerFullPage";
 import { addDay } from "../../../../features/orders/orderSlice";
 import { toast,ToastContainer } from "react-toastify";
 const FeaturedShips = () => {
-  const { pickup, dropoff } = useSelector((state) => state.route);
-  const {currWeight} = useSelector((state)=>state.order.orderWeight);
+  const { pickup, dropoff } = useSelector((state) => state.order.route);
+  const {currWeight} = useSelector((state)=>state.order.order.orderWeight);
   const [shipArr, setShipArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   let shipsData = [];
