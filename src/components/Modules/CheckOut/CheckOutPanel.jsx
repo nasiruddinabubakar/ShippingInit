@@ -112,7 +112,7 @@ const RouteAndShipDetails = ({ imageData, name, price_per_tonne, days }) => {
 };
 
 const OrderDetails = ({mail,companyName}) => {
-  const order = useSelector((state) => state.order);
+  const order = useSelector((state) => state.order.order);
   const keys = [
     "Consignee Name",
     "Order Weight In Tonns",

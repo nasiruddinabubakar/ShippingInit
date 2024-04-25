@@ -79,14 +79,18 @@
 }
 .unreadDiv{
     display: flex;
-    width: 93%;
+    width: 94%;
     justify-content: space-between;
 }
 #number{
-    font-size: 14px;
-    /* color: var(--color-brand--2); */
-    border-radius: 50%;
-    /* background-color: green; */
+   
+    display: flex;
+    line-height: 0%;
+    font-size: 44px;
+    padding-bottom: 2rem;
+    color: var(--color-brand--2);
+
+ 
 }
 .chatDetails h4{
     display: flex;

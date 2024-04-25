@@ -16,7 +16,7 @@ export const Inbox = () => {
   const { data: companiesData } = useQuery({
     queryKey: ['companies'],
     queryFn: () => fetchCompanies(user_id),
-    staleTime: Infinity
+    staleTime: Infinity,
   });
 
   useEffect(() => {
@@ -24,34 +24,23 @@ export const Inbox = () => {
       auth: {
         token: user_id,
       },
-    });
+    }); // Replace with your server URL
 
     // Add event listeners
     socket.on('connect', () => {
       console.log('Connected to server');
     });
-
-    socket.on('getOnlineUser', (data) => {
-      console.log('Someone got online:', data);
-      setOnlines((prevOnlines) => [...prevOnlines, data.user_id]);
-      console.log('Online users:', onlines);
+    socket.on('onlineUsers', (data) => {
+      setOnlines(data);
     });
 
-    socket.on('getOfflineUser', (data) => {
-      console.log('Someone got offline:', data);
-      setOnlines((prevOnlines) =>
-        prevOnlines.filter((id) => id !== data.user_id)
-      );
-      console.log('Online users:', onlines);
-    });
-    
-
-    // Clean up the socket connection
+    // Remove event listeners
     return () => {
+      socket.emit('bye', user_id);
       socket.disconnect();
     };
-  }, [user_id]); // Make sure to include user_id in the dependency array
-  
+  }, []);
+  // Make sure to include user_id in the dependency array
 
   return (
     <div className={`Main ${styles.main}`}>
@@ -83,15 +72,8 @@ export const Inbox = () => {
                       <div className={styles.chatDetails}>
                         <div className={styles.unreadDiv}>
                           <h4>{company.name}</h4>
-                          <h4
-                            style={{
-                              color: onlines?.includes(company.user_id)
-                                ? '#00c46a'
-                                : 'orange',
-                            }}
-                            id={styles.number}
-                          >
-                            3
+                          <h4 id={styles.number}>
+                            {onlines?.includes(company.user_id) ? '.' : ''}
                           </h4>
                         </div>
                         <p>
