@@ -79,11 +79,11 @@
 }
 .unreadDiv{
     display: flex;
-    width: 94%;
+    width: 95%;
     justify-content: space-between;
 }
 #number{
-   
+   font-family: 'Courier New', Courier, monospace;
     display: flex;
     line-height: 0%;
     font-size: 44px;

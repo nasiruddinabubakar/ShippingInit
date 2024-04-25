@@ -12,34 +12,36 @@ import io from 'socket.io-client';
 export const Inbox = () => {
   const [onlines, setOnlines] = useState([]);
   const user_id = useSelector((state) => state.user?.user_id);
-
+  const socket = useSelector((state) => state.socket?.socket);
   const { data: companiesData } = useQuery({
     queryKey: ['companies'],
     queryFn: () => fetchCompanies(user_id),
     staleTime: Infinity,
   });
 
-  useEffect(() => {
-    const socket = io('http://127.0.0.1:5000', {
-      auth: {
-        token: user_id,
-      },
-    }); // Replace with your server URL
+ console.log(socket);
+ 
+ useEffect(() => {
+  const socket = io('http://127.0.0.1:5000', {
+    auth: {
+      token: user_id,
+    },
+  }); // Replace with your server URL
 
-    // Add event listeners
-    socket.on('connect', () => {
-      console.log('Connected to server');
-    });
-    socket.on('onlineUsers', (data) => {
-      setOnlines(data);
-    });
+  // Add event listeners
+  socket.on('connect', () => {
+    console.log('Connected to server');
+  });
+  socket.on('onlineUsers', (data) => {
+    setOnlines(data);
+  });
 
-    // Remove event listeners
-    return () => {
-      socket.emit('bye', user_id);
-      socket.disconnect();
-    };
-  }, []);
+  // Remove event listeners
+  return () => {
+    // socket.emit('bye', user_id);
+    socket.disconnect();
+  };
+}, [user_id]);
   // Make sure to include user_id in the dependency array
 
   return (

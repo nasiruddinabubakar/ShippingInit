@@ -11,10 +11,17 @@ import { SingleOrder } from './SingleOrder';
 import OpacityDiv from '../../framer/OpacityDiv';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../../../libs/react-query/queryKeys';
+import { useDispatch, useSelector } from 'react-redux';
+import { addSocket } from '../../../features/chat/socketSlice';
+import { io } from 'socket.io-client';
 // import "reactjs-popup/dist/index.css";
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [onlines, setOnlines] = useState([]);
+  const user_id = useSelector((state) => state.user?.user_id);
+
   const [login, setLogin] = useState(true);
+  const dispatch = useDispatch();
   useEffect(() => {
     async function verifyToken() {
       const authToken = localStorage.getItem('user');
@@ -40,6 +47,27 @@ export const Layout = () => {
       }
     }
     verifyToken();
+ 
+      const socket = io('http://127.0.0.1:5000', {
+        auth: {
+          token: user_id,
+        },
+      }); // Replace with your server URL
+      dispatch(addSocket(socket));
+      // Add event listeners
+      socket.on('connect', () => {
+        console.log('Connected to server');
+      });
+      socket.on('onlineUsers', (data) => {
+        setOnlines(data);
+      });
+  
+      // Remove event listeners
+      return () => {
+        // socket.emit('bye', user_id);
+        socket.disconnect();
+      };
+    
   }, [login]);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
