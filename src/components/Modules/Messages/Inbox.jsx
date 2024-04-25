@@ -61,7 +61,7 @@ export const Inbox = () => {
             <ul className={styles.chatList}>
               {companiesData?.map((company) => (
                 <li key={company.user_id}>
-                  <Link to="/user/inbox/msg">
+                  <Link to={`/user/inbox/${company.user_id}` }>
                     <div className={styles.chat}>
                       <div className={styles.chatAvatar}>
                         <h4>

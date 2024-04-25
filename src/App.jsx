@@ -74,7 +74,7 @@ function App() {
       </Route>
       <Route path="/user/inbox" element={<Inbox />}>
         <Route path="/user/inbox/" index element={<SingleChatLogo />} />
-        <Route path="/user/inbox/msg"  element={<SingleChat />} />
+        <Route path="/user/inbox/:id"  element={<SingleChat />} />
       </Route>
 
       <Route path="/user/neworder" element={<NewOrder />} />
