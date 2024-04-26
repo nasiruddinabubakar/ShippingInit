@@ -32,10 +32,12 @@ export const SingleChat = () => {
   const params = useParams();
   const id = params.id;
   const user_id = useSelector((state) => state.user?.user_id);
+  const companyName = useSelector((state) => state.socket?.socket);
+  console.log(companyName, user_id, id);
   const [messageInput, setMessageInput] = useState('');
   const socketRef = useRef(null); // Ref for socket instance
   const company_id = id;
-
+  console.log(company_id, user_id);
   const handleMessageInputChange = (event) => {
     setMessageInput(event.target.value);
   };
@@ -44,26 +46,28 @@ export const SingleChat = () => {
     if (messageInput.trim() === '') {
       return;
     }
-console.log("sending");
+    console.log('sending');
     socketRef.current?.emit('sendMessage', {
       user_id,
       company_id,
-      sender_id:user_id, // Sender's ID
-      receiver_id:company_id, // Recipient's ID
+      sender_id: user_id, // Sender's ID
+      receiver_id: company_id, // Recipient's ID
       message: messageInput,
     });
-    
 
     // Clear the message input field
     setMessageInput('');
   };
-
-  useEffect(() => {
-    // Scroll to the bottom of the container
+  function scrollToBottom() {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop =
         messageContainerRef.current.scrollHeight;
     }
+  }
+
+  useEffect(() => {
+    // Scroll to the bottom of the container
+    scrollToBottom();
     socketRef.current = io('http://127.0.0.1:5000', {
       auth: {
         token: user_id,
@@ -76,15 +80,23 @@ console.log("sending");
     });
     // Join the chat room corresponding to the user_id and company_id combination
     socketRef.current.emit('joinChatRoom', { user_id, company_id });
-
+    socketRef.current.on('chatHistory', ({ chats }) => {
+      console.log('Received chat history:', chats);
+      setMessages(chats);
+    });
     socketRef.current.on(
       'newMessage',
-      ({  sender_id, receiver_id, message }) => {
-        console.log('Received new message:', {  sender_id, receiver_id, message });
+      ({ sender_id, receiver_id, message }) => {
+        console.log('Received new message:', {
+          sender_id,
+          receiver_id,
+          message,
+        });
         setMessages((prevMessages) => [
           ...prevMessages,
           { sender_id, receiver_id, message },
         ]);
+        scrollToBottom();
       }
     );
 
@@ -95,7 +107,7 @@ console.log("sending");
       // socket.emit('bye', user_id);
       socketRef.current.disconnect();
     };
-  }, []); // This effect runs only once after the component mounts
+  }, [company_id]); // This effect runs only once after the component mounts
 
   return (
     <Opacity>
@@ -103,25 +115,22 @@ console.log("sending");
         <div className={styles.chatDiv}>
           <div className={styles.chatHeader}>
             <div className={styles.chatAvatar}>
-              <h4>FT</h4>
+              <h4>
+                {companyName
+                  ?.split(' ')
+                  .map((word) => word[0].toUpperCase())
+                  .join('')}
+              </h4>
             </div>
             <div>
-              <h4 className={styles.headingg}>Forex Traders</h4>
+              <h4 className={styles.headingg}>{companyName}</h4>
             </div>
           </div>
-          <div className={styles.messages} ref={messageContainerRef}>
+          <div className={styles.messages}>
             {/* // Messages will be displayed here */}
-            {
-              // <div className={styles.message}>
-              //   <div className={styles.messageAvatar}>
-              //     <h4>FT</h4>
-              //   </div>
-              //   <div className={styles.messageContent}>
-              //     <p>Hi, thanks for contacting us, we will reach out shortly</p>
-              //   </div>
-              //   </div>
-              messages.map((message, index) => {
-                return (
+            {messages.map((message, index) => {
+              return (
+                <>
                   <div
                     className={
                       message.sender_id === user_id
@@ -142,50 +151,20 @@ console.log("sending");
                       <p>{message.message}</p>
                     </div>
                   </div>
-                  // <div className={styles.message}>
-                  // <div className={styles.messageAvatar}>
-                  //   <h4>FT</h4>
-                  // </div>
-                  // <div className={styles.messageContent}>
-                  //   <p>Can you please state your Order Number ? </p>
-                  // </div>
-                  // </div>
-                  // <div className={styles.userMessage}>
-                  // <div className={styles.messageAvatar}>
-                  //   <h4>NA</h4>
-                  // </div>
-                  // <div className={styles.userMessageContent}>
-                  //   <p>I believe its something along the lines of i dont give a fuck abouy yall</p>
-                  // </div>
-                  // </div>
-                  // <div className={styles.message}>
-                  // <div className={styles.messageAvatar}>
-                  //   <h4>FT</h4>
-                  // </div>
-                  // <div className={styles.messageContent}>
-                  //   <p>Sir can you please calm down ? </p>
-                  // </div>
-                  // </div>
-                  // <div className={styles.userMessage}>
-                  // <div className={styles.messageAvatar}>
-                  //   <h4>NA</h4>
-                  // </div>
-                  // <div className={styles.userMessageContent}>
-                  //   <p>I would literally beat the shit out of you 😂😂😂</p>
-                  // </div>
-                  // </div>
-                );
-              })
-            }
+                </>
+              );
+            })}
           </div>
+          <div ref={messageContainerRef}></div>
           <div className={styles.newMessage}>
             <input
               type="text"
               placeholder="Type a message"
               className={styles.input}
               onChange={handleMessageInputChange}
+              ref={messageContainerRef}
             />
-            <button className={styles.sendButton}  onClick={sendMessage}>
+            <button className={styles.sendButton} onClick={sendMessage}>
               <SendIcon sx={{ size: 22 }} />
             </button>
           </div>

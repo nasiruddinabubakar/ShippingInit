@@ -1,27 +1,40 @@
 import { MoveLeft } from 'lucide-react';
 import { Header } from '../../UI/Header';
 import styles from './Inbox.module.css';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import OpacityDiv from '../../framer/OpacityDiv';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCompanies } from '../../../libs/react-query/api';
 import io from 'socket.io-client';
+import { addSocket } from '../../../features/chat/socketSlice';
 
 export const Inbox = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [onlines, setOnlines] = useState([]);
   const user_id = useSelector((state) => state.user?.user_id);
-  const socket = useSelector((state) => state.socket?.socket);
+  const companyData = useSelector((state) => state.socket?.socket);
   const { data: companiesData } = useQuery({
     queryKey: ['companies'],
     queryFn: () => fetchCompanies(user_id),
     staleTime: Infinity,
   });
 
- console.log(socket);
+ console.log(companiesData);
+
+  function navigateToChat(company){
+    const {name, user_id} = company;
+dispatch(addSocket(name));
+navigate(`/user/inbox/${user_id}`);
+
+  }
+
+
  
  useEffect(() => {
+
   const socket = io('http://127.0.0.1:5000', {
     auth: {
       token: user_id,
@@ -34,6 +47,10 @@ export const Inbox = () => {
   });
   socket.on('onlineUsers', (data) => {
     setOnlines(data);
+  });
+
+  socket.on("notification", ({sender_id, message}) => {
+    console.log(sender_id,message);
   });
 
   // Remove event listeners
@@ -60,8 +77,8 @@ export const Inbox = () => {
             <div className={styles.chatHead}>Chats</div>
             <ul className={styles.chatList}>
               {companiesData?.map((company) => (
-                <li key={company.user_id}>
-                  <Link to={`/user/inbox/${company.user_id}` }>
+                <li key={company.user_id} onClick={()=>navigateToChat(company)}>
+                  {/* <Link to={`/user/inbox/${company.user_id}` }> */}
                     <div className={styles.chat}>
                       <div className={styles.chatAvatar}>
                         <h4>
@@ -84,7 +101,7 @@ export const Inbox = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  {/* </Link> */}
                 </li>
               ))}
             </ul>
