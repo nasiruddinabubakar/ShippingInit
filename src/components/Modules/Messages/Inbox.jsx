@@ -46,6 +46,7 @@ navigate(`/user/inbox/${user_id}`);
     console.log('Connected to server');
   });
   socket.on('onlineUsers', (data) => {
+    console.log(data)
     setOnlines(data);
   });
 

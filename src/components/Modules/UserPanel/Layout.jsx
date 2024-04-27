@@ -3,17 +3,17 @@ import styles from './Layout.module.css';
 import { Header } from '../../UI/Header';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Spinner from '../../UI/Spinner';
+
 import React from 'react';
 
-import { toast } from 'react-toastify';
-import { SingleOrder } from './SingleOrder';
+
 import OpacityDiv from '../../framer/OpacityDiv';
-import { QueryClient, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEYS } from '../../../libs/react-query/queryKeys';
+import {  useQueryClient } from '@tanstack/react-query';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addSocket } from '../../../features/chat/socketSlice';
 import { io } from 'socket.io-client';
+import { HeaderLogout } from '../../UI/HeaderLogout';
 // import "reactjs-popup/dist/index.css";
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,15 +53,20 @@ export const Layout = () => {
           token: user_id,
         },
       }); // Replace with your server URL
-      dispatch(addSocket(socket));
+     
       // Add event listeners
       socket.on('connect', () => {
         console.log('Connected to server');
       });
       socket.on('onlineUsers', (data) => {
+        console.log('onlineUsers', data); 
         setOnlines(data);
       });
-  
+      socket.on('newnotification', ({sender_id, receiver_id, message}) => {
+      console.log('notification', {sender_id, receiver_id, message});
+      const audio = new Audio('/notification.mp3');
+      audio.play();
+      })
       // Remove event listeners
       return () => {
         // socket.emit('bye', user_id);
@@ -84,7 +89,7 @@ export const Layout = () => {
 
   return (
     <div className={`Main ${styles.main}`}>
-      <Header />
+      <HeaderLogout />
       <OpacityDiv>
         <div className={styles.window}>
           <div className={styles.navli}>
