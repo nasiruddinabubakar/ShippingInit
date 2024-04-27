@@ -8,12 +8,14 @@ import React from 'react';
 
 
 import OpacityDiv from '../../framer/OpacityDiv';
-import {  useQueryClient } from '@tanstack/react-query';
+import {  useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addSocket } from '../../../features/chat/socketSlice';
+import { addChats, addNewNotification, addSocket } from '../../../features/chat/socketSlice';
 import { io } from 'socket.io-client';
 import { HeaderLogout } from '../../UI/HeaderLogout';
+import { ToastContainer, toast } from 'react-toastify';
+import { fetchCompanies } from '../../../libs/react-query/api';
 // import "reactjs-popup/dist/index.css";
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +68,14 @@ export const Layout = () => {
       console.log('notification', {sender_id, receiver_id, message});
       const audio = new Audio('/notification.mp3');
       audio.play();
+      toast.info(message, {
+        position: 'top-right',
+        autoClose: 5000,
+        className:'toast_message',
+        progress: undefined,
+        closeOnClick: true,
+      });
+      dispatch(addNewNotification({sender_id, receiver_id, message}));
       })
       // Remove event listeners
       return () => {
@@ -75,6 +85,13 @@ export const Layout = () => {
     
   }, [login]);
   const queryClient = useQueryClient();
+  const { data: companiesData } = useQuery({
+    queryKey: ['companies'],
+    queryFn: () => fetchCompanies(user_id)
+    
+  });
+  dispatch(addChats(companiesData));
+  console.log(companiesData);
   const navigate = useNavigate();
   function handleLogout(e) {
     e.preventDefault();
@@ -89,8 +106,9 @@ export const Layout = () => {
 
   return (
     <div className={`Main ${styles.main}`}>
-      <HeaderLogout />
+      <Header />
       <OpacityDiv>
+      <ToastContainer/>
         <div className={styles.window}>
           <div className={styles.navli}>
             <>
