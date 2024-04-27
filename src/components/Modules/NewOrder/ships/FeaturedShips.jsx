@@ -1,11 +1,11 @@
 import {  useNavigate } from "react-router-dom";
-import { Header } from "../../../UI/Header";
+import { Header } from "../../../shared/Header";
 import styles from "./FeaturedShips.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { postData } from "../../../../utils/postData";
-import SpinnerFullPage from "../../../UI/SpinnerFullPage";
+import SpinnerFullPage from "../../../shared/SpinnerFullPage";
 
 import { addDay } from "../../../../features/orders/orderSlice";
 import { toast,ToastContainer } from "react-toastify";

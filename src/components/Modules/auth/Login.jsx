@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { RegisterData } from "./RegisterData";
 import { LoginData } from "./LoginData";
 
-import { Header } from "../../UI/Header";
+import { Header } from "../../shared/Header";
 import { useNavigate } from "react-router-dom";
-import SpinnerFullPage from "../../UI/SpinnerFullPage";
+import SpinnerFullPage from "../../shared/SpinnerFullPage";
 
 export const Login = () => {
   const [isloading, setIsLoading] = useState(true);
@@ -40,7 +40,7 @@ export const Login = () => {
       }
     }
     verifyToken();
-  }, []);
+  }, );
 
   function onHandleLogin() {
     setIsLogin((isLogin) => !isLogin);
@@ -62,7 +62,7 @@ export function ToggleLoginSignup({ onHandleLogin, isLogin }) {
       {isLogin ? (
         <>
           <p>New Account?</p>
-          <a href="#" onClick={onHandleLogin}>
+          <a href="_blank" onClick={onHandleLogin} style={{color:'#ffb545'}} >
             Register Now
           </a>
         </>
@@ -70,7 +70,7 @@ export function ToggleLoginSignup({ onHandleLogin, isLogin }) {
         <>
           {" "}
           <p>Already a User?</p>
-          <a href="#" onClick={onHandleLogin}>
+          <a   href="_blank" onClick={onHandleLogin} style={{color:"#00c46a"}}>
             Login Now
           </a>
         </>

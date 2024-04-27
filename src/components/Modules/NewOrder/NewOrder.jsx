@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { addOrder } from "../../../features/orders/orderSlice";
-import { Header } from "../../UI/Header";
+import { Header } from "../../shared/Header";
 import TopDown from "../../framer/TopDown";
 import { NewOrderForm } from "./NewOrderForm";
 import { useEffect, useReducer } from "react";

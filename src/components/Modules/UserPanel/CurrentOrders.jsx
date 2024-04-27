@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Spinner from '../../UI/Spinner';
+import Spinner from '../../shared/Spinner';
 import styles from './Layout.module.css';
 import { useOrders } from '../../../libs/react-query/queriesAndMutations';
 import { Link } from 'react-router-dom';

@@ -87,7 +87,8 @@
   }
   p , a{
       font-size: 1.3rem;
-     
+     width: auto;
+     text-wrap: nowrap;
       display: flex;
       color: #d6dee0;
      
@@ -97,7 +98,8 @@
       display: flex;
       gap: 1rem;
       width: 20rem;
-      margin: 1rem auto 1rem auto;
+      margin:1rem auto
+    
   }
   .map{
     height: 100vh;

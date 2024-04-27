@@ -1,5 +1,5 @@
 import styles from "./ShipInfo.module.css";
-import { Header } from "../../../UI/Header";
+import { Header } from "../../../shared/Header";
 
 import Opacity from "../../../framer/Opacity";
 import { Check } from "lucide-react";
@@ -7,7 +7,7 @@ import {  useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addShip } from "../../../../features/orders/orderSlice";
-import SpinnerFullPage from "../../../UI/SpinnerFullPage";
+import SpinnerFullPage from "../../../shared/SpinnerFullPage";
 
 
 export default () => {

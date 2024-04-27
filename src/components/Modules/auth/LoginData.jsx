@@ -5,7 +5,7 @@ import {  useNavigate } from "react-router-dom";
 
 import TopDown from "../../framer/TopDown";
 import { toast, ToastContainer } from "react-toastify";
-import SpinnerFullPage from "../../UI/SpinnerFullPage";
+import SpinnerFullPage from "../../shared/SpinnerFullPage";
 import { postData } from "../../../utils/postData";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../../features/user/userSlice";

@@ -1,5 +1,5 @@
 import { MoveLeft } from 'lucide-react';
-import { Header } from '../../UI/Header';
+import { Header } from '../../shared/Header';
 import styles from './Inbox.module.css';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import OpacityDiv from '../../framer/OpacityDiv';

@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { Header } from "../../UI/Header";
+import { Header } from "../../shared/Header";
 import OpacityDiv from "../../framer/OpacityDiv";
 import styles from "./CheckOutPanel.module.css";
 import { CheckoutBox } from "./CheckoutBox";
 import { useEffect, useState } from "react";
-import Spinner from "../../UI/Spinner";
+import Spinner from "../../shared/Spinner";
 
 export const CheckoutPanel = () => {
   const [isLoading, setIsLoading] = useState(false);

@@ -1,6 +1,6 @@
 import { ArrowRightLeft, Check, Ship, User, LogOut, Mail } from 'lucide-react';
 import styles from './Layout.module.css';
-import { Header } from '../../UI/Header';
+import { Header } from '../../shared/Header';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -11,9 +11,9 @@ import OpacityDiv from '../../framer/OpacityDiv';
 import {  useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addChats, addNewNotification, addSocket } from '../../../features/chat/socketSlice';
+import { addChats, addNewNotification } from '../../../features/chat/socketSlice';
 import { io } from 'socket.io-client';
-import { HeaderLogout } from '../../UI/HeaderLogout';
+
 import { ToastContainer, toast } from 'react-toastify';
 import { fetchCompanies } from '../../../libs/react-query/api';
 // import "reactjs-popup/dist/index.css";
