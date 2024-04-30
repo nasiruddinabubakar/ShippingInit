@@ -14,7 +14,7 @@ export const Inbox = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [onlines, setOnlines] = useState([]);
-  const user_id = useSelector((state) => state.user?.user_id);
+  const user_id = localStorage.getItem('user_id')
   const newMessage = useSelector((state) => state.socket?.newNotification);
   const companiesData = useSelector((state) => state.socket?.companyChats);
 

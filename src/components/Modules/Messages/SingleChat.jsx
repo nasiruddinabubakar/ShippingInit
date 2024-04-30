@@ -31,7 +31,7 @@ export const SingleChat = () => {
   const messageContainerRef = useRef(null);
   const params = useParams();
   const id = params.id;
-  const user_id = useSelector((state) => state.user?.user_id);
+  const user_id = localStorage.getItem('user_id');
   const companyName = useSelector((state) => state.socket?.socket);
   const user_name = useSelector((state) => state.user?.user_name);
   console.log(companyName, user_id, id);
