@@ -1,19 +1,18 @@
-import { useState } from "react";
-import styles from "./SignUp.module.css";
-import { InputWithLabel } from "../../Molecules/InputWithLabel";
-import {  useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import styles from './SignUp.module.css';
+import { InputWithLabel } from '../../Molecules/InputWithLabel';
+import { useNavigate } from 'react-router-dom';
 
-import TopDown from "../../framer/TopDown";
-import { toast, ToastContainer } from "react-toastify";
-import SpinnerFullPage from "../../shared/SpinnerFullPage";
-import { postData } from "../../../utils/postData";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../../features/user/userSlice";
-
+import TopDown from '../../framer/TopDown';
+import { toast, ToastContainer } from 'react-toastify';
+import SpinnerFullPage from '../../shared/SpinnerFullPage';
+import { postData } from '../../../utils/postData';
+import { useDispatch } from 'react-redux';
+import { addUser, addUserName } from '../../../features/user/userSlice';
 
 export function LoginData() {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
   const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,43 +34,45 @@ export function LoginData() {
   const notify = (text) => {
     toast.error(text, {
       position: toast.POSITION.TOP_RIGHT,
-      className: "toast_message",
+      className: 'toast_message',
     });
   };
 
   async function handleLogin(e) {
     e.preventDefault();
     if (validateEmail(mail) === false) {
-      notify("Email is not valid");
+      notify('Email is not valid');
       return;
     } else {
     }
     if (password.length < 4) {
-      notify("Enter Valid Password");
+      notify('Enter Valid Password');
       return;
     }
-//https://ship-backend-qmsc.onrender.com/api/users/login
+    //https://ship-backend-qmsc.onrender.com/api/users/login
     try {
       setIsLoading((isloading) => true);
-      const response = await postData("http://127.0.0.1:5000/api/users/login", {
+      const response = await postData('http://127.0.0.1:5000/api/users/login', {
         mail: mail,
         password: password,
       });
       setIsLoading((isloading) => false);
-      console.log(response);
-      dispatch(addUser(response.user?.user_id));
-      if (response.status === "success") {
-        localStorage.setItem("user", response.auth);
+      
+      if (response.status === 'success') {
+        localStorage.setItem('user', response.auth);
+        
+    localStorage.setItem('user_id', response.user?.user_id);
+      dispatch(addUserName(response.user?.name));
         moveToNext();
       } else {
-        throw new Error("Invalid Email Or Password");
+        throw new Error('Invalid Email Or Password');
       }
       // Handle the response here if needed.
     } catch (error) {
       if (error) {
         toast.error(error.message, {
           position: toast.POSITION.TOP_RIGHT,
-          className: "toast_message",
+          className: 'toast_message',
         });
       }
     } finally {
@@ -84,7 +85,7 @@ export function LoginData() {
       setIsLoading((isloading) => true);
       setTimeout(() => {
         setIsLoading((isloading) => false);
-        navigate("/");
+        navigate('/');
       }, 100);
     }
   }
@@ -106,17 +107,17 @@ export const LoginForm = ({ onhandleEmail, onhandlePassword, handleLogin }) => {
       <form className={styles.login} onSubmit={(e) => handleLogin(e)}>
         <div className={styles.emailinput}>
           <InputWithLabel
-            text={"Email Address"}
-            type={"email"}
-            placeholder={"jack99@gmail.com"}
+            text={'Email Address'}
+            type={'email'}
+            placeholder={'jack99@gmail.com'}
             onChangeInput={onhandleEmail}
           />
         </div>
         <div className={styles.emailinput}>
           <InputWithLabel
-            text={"Password"}
-            type={"password"}
-            placeholder={"***"}
+            text={'Password'}
+            type={'password'}
+            placeholder={'***'}
             onChangeInput={onhandlePassword}
           />
         </div>
@@ -128,4 +129,3 @@ export const LoginForm = ({ onhandleEmail, onhandlePassword, handleLogin }) => {
     </TopDown>
   );
 };
-

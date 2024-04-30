@@ -33,6 +33,7 @@ export const SingleChat = () => {
   const id = params.id;
   const user_id = useSelector((state) => state.user?.user_id);
   const companyName = useSelector((state) => state.socket?.socket);
+  const user_name = useSelector((state) => state.user?.user_name);
   console.log(companyName, user_id, id);
   const [messageInput, setMessageInput] = useState('');
   const socketRef = useRef(null); // Ref for socket instance
@@ -139,7 +140,17 @@ export const SingleChat = () => {
                     }
                   >
                     <div className={styles.messageAvatar}>
-                      <h4>NA</h4>
+                      <h4>
+                        {message.sender_id === user_id
+                          ? user_name
+                              .split(' ')
+                              .map((word) => word[0].toUpperCase())
+                              .join('')
+                          : companyName
+                              .split(' ')
+                              .map((word) => word[0].toUpperCase())
+                              .join('')}
+                      </h4>
                     </div>
                     <div
                       className={

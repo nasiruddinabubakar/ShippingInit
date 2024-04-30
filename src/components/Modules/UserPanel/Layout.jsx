@@ -20,7 +20,7 @@ import { fetchCompanies } from '../../../libs/react-query/api';
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [onlines, setOnlines] = useState([]);
-  const user_id = useSelector((state) => state.user?.user_id);
+  const user_id = localStorage.getItem('user_id');
 
   const [login, setLogin] = useState(true);
   const dispatch = useDispatch();

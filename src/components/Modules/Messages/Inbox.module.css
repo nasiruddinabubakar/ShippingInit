@@ -78,12 +78,13 @@
     justify-content: flex-start;
     text-wrap: nowrap;
     gap: 0.4rem;
+    width: 35rem;
     
    
 }
 .unreadDiv{
     display: flex;
-    width: 90%;
+    width: 95%;
     justify-content: space-between;
 }
 #number{

@@ -77,7 +77,6 @@ export const Inbox = () => {
                   key={company.user_id}
                   onClick={() => navigateToChat(company)}
                 >
-                  {/* <Link to={`/user/inbox/${company.user_id}` }> */}
                   <div className={styles.chat}>
                     <div className={styles.chatAvatar}>
                       <h4>
@@ -110,7 +109,7 @@ export const Inbox = () => {
                       </p>
                     </div>
                   </div>
-                  {/* </Link> */}
+                  
                 </li>
               ))}
             </ul>
