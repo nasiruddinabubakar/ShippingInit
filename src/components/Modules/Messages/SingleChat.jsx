@@ -5,8 +5,12 @@ import styles from './SingleChat.module.css';
 import { useEffect, useRef, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchCompanies } from '../../../libs/react-query/api';
+import { addChats } from '../../../features/chat/socketSlice';
+import { ToastContainer, toast } from 'react-toastify';
 export const SingleChatLogo = () => {
   return (
     <Opacity>
@@ -29,20 +33,23 @@ export const SingleChatLogo = () => {
 export const SingleChat = () => {
   const [messages, setMessages] = useState([]);
   const messageContainerRef = useRef(null);
+  const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
   const user_id = localStorage.getItem('user_id');
   const companyName = useSelector((state) => state.socket?.socket);
+  const companiesData = useSelector((state) => state.socket?.companyChats);
   const user_name = useSelector((state) => state.user?.user_name);
   console.log(companyName, user_id, id);
   const [messageInput, setMessageInput] = useState('');
   const socketRef = useRef(null); // Ref for socket instance
   const company_id = id;
   console.log(company_id, user_id);
+  const queryClient = useQueryClient();
   const handleMessageInputChange = (event) => {
     setMessageInput(event.target.value);
   };
-
+try{
   const sendMessage = () => {
     if (messageInput.trim() === '') {
       return;
@@ -78,6 +85,18 @@ export const SingleChat = () => {
     // Add event listeners
     socketRef.current.on('connect', () => {
       console.log('Connected to server');
+    });
+    socketRef.current.on('newnotification', ({ sender_id, message }) => {
+      const {name} = companiesData.find(company => company.user_id === sender_id && company_id !== sender_id);
+      if(name){
+        const audio = new Audio('/notification.mp3');
+        audio.play();
+        toast.info(`New Message from ${name}`, {
+          autoClose: 3000,
+          className:'toast_message',
+        });
+
+      }
     });
     // Join the chat room corresponding to the user_id and company_id combination
     socketRef.current.emit('joinChatRoom', { user_id, company_id });
@@ -116,6 +135,7 @@ export const SingleChat = () => {
         <div className={styles.chatDiv}>
           <div className={styles.chatHeader}>
             <div className={styles.chatAvatar}>
+            <ToastContainer/>
               <h4>
                 {companyName
                   ?.split(' ')
@@ -159,7 +179,7 @@ export const SingleChat = () => {
                           : styles.messageContent
                       }
                     >
-                      <p>{message.message}</p>
+                      <p style={{color:{}}}>{message.message}</p>
                     </div>
                   </div>
                 </>
@@ -182,5 +202,20 @@ export const SingleChat = () => {
         </div>
       </div>
     </Opacity>
-  );
+  );}
+  catch(err){
+    toast.error('An Error Occured',{
+      className:'toast_message',
+    });
+    console.log(err);
+    return <div className={styles.chatWindow}>
+      <ToastContainer/>
+      <h1   style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>Error</h1>
+    </div>
+    
+  }
 };

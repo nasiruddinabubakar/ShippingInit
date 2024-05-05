@@ -62,7 +62,7 @@ export function ToggleLoginSignup({ onHandleLogin, isLogin }) {
       {isLogin ? (
         <>
           <p>New Account?</p>
-          <a href="_blank" onClick={onHandleLogin} style={{color:'#ffb545'}} >
+          <a  onClick={onHandleLogin} style={{color:'#ffb545',cursor:'pointer'}} >
             Register Now
           </a>
         </>
@@ -70,7 +70,7 @@ export function ToggleLoginSignup({ onHandleLogin, isLogin }) {
         <>
           {" "}
           <p>Already a User?</p>
-          <a   href="_blank" onClick={onHandleLogin} style={{color:"#00c46a"}}>
+          <a   onClick={onHandleLogin} style={{color:"#00c46a",cursor:'pointer'}}>
             Login Now
           </a>
         </>

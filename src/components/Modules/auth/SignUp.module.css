@@ -133,3 +133,13 @@
       width: 90%;
     }
   }
+  .dropdown  select{
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-light--3);
+    transition: all 0.2s;
+  }

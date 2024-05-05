@@ -21,9 +21,16 @@ export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [onlines, setOnlines] = useState([]);
   const user_id = localStorage.getItem('user_id');
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const { data: companiesData } = useQuery({
+    queryKey: ['companies'],
+    queryFn: () => fetchCompanies(user_id)
+    
+  });
+  dispatch(addChats(companiesData));
 
   const [login, setLogin] = useState(true);
-  const dispatch = useDispatch();
   useEffect(() => {
     async function verifyToken() {
       const authToken = localStorage.getItem('user');
@@ -66,9 +73,10 @@ export const Layout = () => {
       });
       socket.on('newnotification', ({sender_id, receiver_id, message}) => {
       console.log('notification', {sender_id, receiver_id, message});
+      const {name} = companiesData.find(company => company.user_id === sender_id);
       const audio = new Audio('/notification.mp3');
       audio.play();
-      toast.info(message, {
+      toast.info(`New Message from ${name}`, {
         position: 'top-right',
         autoClose: 5000,
         className:'toast_message',
@@ -84,14 +92,7 @@ export const Layout = () => {
       };
     
   }, [login]);
-  const queryClient = useQueryClient();
-  const { data: companiesData } = useQuery({
-    queryKey: ['companies'],
-    queryFn: () => fetchCompanies(user_id)
-    
-  });
-  dispatch(addChats(companiesData));
-  console.log(companiesData);
+  
   const navigate = useNavigate();
   function handleLogout(e) {
     e.preventDefault();
@@ -109,7 +110,7 @@ export const Layout = () => {
       <Header />
       <OpacityDiv>
       <ToastContainer/>
-        <div className={styles.window}>
+        <div className={styles.window} data-testid='layout'>
           <div className={styles.navli}>
             <>
               <ul>

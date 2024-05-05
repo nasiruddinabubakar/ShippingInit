@@ -45,7 +45,7 @@ export const Inbox = () => {
       setOnlines(data);
     });
 
-    socket.on('notification', ({ sender_id, message }) => {
+    socket.on('newnotification', ({ sender_id, message }) => {
       console.log(sender_id, message);
     });
 

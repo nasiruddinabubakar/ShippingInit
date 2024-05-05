@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  style={
+    Object {
+      "marginTop": "0rem",
+    }
+  }
+>
+  <form
+    className="login"
+    data-testid="login"
+    onSubmit={[Function]}
+  >
+    <div
+      className="emailinput"
+    >
+      <label>
+        Email Address
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="jack99@gmail.com"
+        type="email"
+      />
+    </div>
+    <div
+      className="emailinput"
+    >
+      <label>
+        Password
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="***"
+        type="password"
+      />
+    </div>
+    <button
+      type="submit"
+    >
+      Login
+    </button>
+    <div
+      className="Toastify"
+    />
+  </form>
+</div>
+`;

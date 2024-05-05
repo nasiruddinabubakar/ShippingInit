@@ -11,14 +11,15 @@ import { SocketProvider } from './context/SocketProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
-    <BrowserRouter>
+   
       <QueryProvider>
         <Provider store={store}>
         {/* <SocketProvider> */}
+        <BrowserRouter>
           <App />
-          
+          </BrowserRouter>
   {/* </SocketProvider> */}
         </Provider>
       </QueryProvider>
-    </BrowserRouter>
+    
 );

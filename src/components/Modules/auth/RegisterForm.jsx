@@ -9,7 +9,7 @@ export default ({
 }) => {
   return (
     <TopDown>
-      <form className={styles.login} onSubmit={handleRegister}>
+      <form className={styles.login} onSubmit={handleRegister} data-testid='register'>
         <div className={styles.emailinput}>
           <InputWithLabel
             text={"Enter Your Name"}

@@ -104,7 +104,7 @@ export function LoginData() {
 export const LoginForm = ({ onhandleEmail, onhandlePassword, handleLogin }) => {
   return (
     <TopDown>
-      <form className={styles.login} onSubmit={(e) => handleLogin(e)}>
+      <form className={styles.login} onSubmit={(e) => handleLogin(e)} data-testid="login">
         <div className={styles.emailinput}>
           <InputWithLabel
             text={'Email Address'}

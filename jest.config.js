@@ -1,12 +1,9 @@
-// jest.config.js
 module.exports = {
-  testEnvironment: "jsdom",
-  transformIgnorePatterns: [
-    "/node_modules/(?!react-toastify/)",
-    "/node_modules/(?!your-css-module/)",
-  ],
+  testPathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/dist'], // might want?
   moduleNameMapper: {
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    '@components(.*)': '<rootDir>/src/components$1' // might want?
   },
-  // ... other Jest configurations
+  moduleDirectories: ['<rootDir>/node_modules', '<rootDir>/src'],
+  setupFilesAfterEnv: ['<rootDir>/src/jest-setup.ts'] // this is the KEY
+  // note it should be in the top level of the exported object.
 };

@@ -46,6 +46,7 @@ export default function () {
     dispatch({ type: "SET_ORDERTYPE", payload: e.target.value });
   }
   function onHandleFragile(e) {
+    console.log(e.target.value)
     dispatch({ type: "SET_FRAGILE", payload: e.target.value });
   }
 
