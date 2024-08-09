@@ -37,7 +37,7 @@ export const Layout = () => {
       if (authToken) {
         setIsLoading(true);
         const res = await fetch(
-          'http://127.0.0.1:5000/api/users/authorization',
+          'https://ship-backend-qmsc.onrender.com/api/users/authorization',
           {
             headers: {
               authorization: authToken,
@@ -57,7 +57,7 @@ export const Layout = () => {
     }
     verifyToken();
  
-      const socket = io('http://127.0.0.1:5000', {
+      const socket = io('https://ship-backend-qmsc.onrender.com/', {
         auth: {
           token: user_id,
         },

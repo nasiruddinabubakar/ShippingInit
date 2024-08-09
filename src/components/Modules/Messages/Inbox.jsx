@@ -30,7 +30,7 @@ export const Inbox = () => {
   }
 
   useEffect(() => {
-    const socket = io('http://127.0.0.1:5000', {
+    const socket = io('https://ship-backend-qmsc.onrender.com', {
       auth: {
         token: user_id,
       },

@@ -52,7 +52,7 @@ export function LoginData() {
     //https://ship-backend-qmsc.onrender.com/api/users/login
     try {
       setIsLoading((isloading) => true);
-      const response = await postData('http://127.0.0.1:5000/api/users/login', {
+      const response = await postData('https://ship-backend-qmsc.onrender.com/api/users/login', {
         mail: mail,
         password: password,
       });
