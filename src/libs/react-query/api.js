@@ -1,7 +1,7 @@
 export async function getOrders() {
     try {
     
-      const res = await fetch('https://ship-backend-qmsc.onrender.com/api/orders/history', {
+      const res = await fetch('http://127.0.0.1:5000/api/orders/history', {
         headers: {
           authorization: `${localStorage.getItem('user')}`,
         },
@@ -19,7 +19,7 @@ export async function getAllCountries () {
  
   try{
 
-  const res = await fetch('https://ship-backend-qmsc.onrender.com/api/countries',{
+  const res = await fetch('http://127.0.0.1:5000/api/countries',{
     method: 'GET',
   });
   const data = await res.json();
@@ -32,7 +32,7 @@ catch(err){
 }
 async function deleteOrder(booking_id) {
   console.log('hello transit');
-  const res = await fetch(`https://ship-backend-qmsc.onrender.com/api/orders/${booking_id}`, {
+  const res = await fetch(`http://127.0.0.1:5000/api/orders/${booking_id}`, {
     method: 'DELETE',
     headers: {
       authorization: `${localStorage.getItem('user')}`,
@@ -43,7 +43,7 @@ async function deleteOrder(booking_id) {
 
 export   async function fetchCompanies(user_id) {
   const response = await fetch(
-    'https://ship-backend-qmsc.onrender.com/api/messages/get-user-chats',
+    'http://127.0.0.1:5000/api/messages/get-user-chats',
     {
      
       headers: { userID: user_id },

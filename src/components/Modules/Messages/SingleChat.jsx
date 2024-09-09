@@ -76,7 +76,7 @@ try{
   useEffect(() => {
     // Scroll to the bottom of the container
     scrollToBottom();
-    socketRef.current = io('https://ship-backend-qmsc.onrender.com', {
+    socketRef.current = io('http://localhost:3000', {
       auth: {
         token: user_id,
       },

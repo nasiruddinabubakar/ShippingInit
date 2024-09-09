@@ -87,7 +87,7 @@ export const RegisterData = () => {
     }
     try {
       const res = await postData(
-        "https://ship-backend-qmsc.onrender.com/api/users/register",
+        "http://127.0.0.1:5000/api/users/register",
         registerUser
       );
       console.log(res);

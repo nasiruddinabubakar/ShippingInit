@@ -9,7 +9,7 @@ const Account = () => {
       const authToken = localStorage.getItem('user');
       if (authToken) {
         setIsLoading(true);
-        const res = await fetch('https://ship-backend-qmsc.onrender.com/api/users/getuser', {
+        const res = await fetch('http://127.0.0.1:5000/api/users/getuser', {
           headers: {
             authorization: authToken,
           },

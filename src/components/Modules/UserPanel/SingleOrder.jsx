@@ -18,7 +18,7 @@ export const SingleOrder = () => {
     async function getOrderDetails() {
       try {
         setIsLoading(true);
-        const res = await fetch(`https://ship-backend-qmsc.onrender.com/api/orders/${id}`, {
+        const res = await fetch(`http://127.0.0.1:5000/api/orders/${id}`, {
           headers: {
             authorization: `${localStorage.getItem('user')}`,
           },
